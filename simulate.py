@@ -1,3 +1,9 @@
+"""
+simulate.py
+Script to run a PyBullet simulation that loads a plane and an SDF world file, 
+sets gravity, and continuously steps through the simulation loop.
+"""
+
 import pybullet as p
 import pybullet_data
 import time
