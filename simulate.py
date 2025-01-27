@@ -7,10 +7,6 @@ sets gravity, and continuously steps through the simulation loop.
 import pybullet as p
 import pybullet_data
 import time
-import generate
-
-generate.Create_World()
-generate.Create_Robot()
 
 running = True
 
