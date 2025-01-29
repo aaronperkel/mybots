@@ -10,12 +10,12 @@ def Create_World():
     Create an SDF file named 'world.sdf' containing a single cube.
     """
     pyrosim.Start_SDF("world.sdf")
-    pyrosim.Send_Cube(name="Box", pos=[-4,4,0.5], size=[1,1,1])
+    pyrosim.Send_Cube(name="Box", pos=[4,4,0.5], size=[1,1,1])
     pyrosim.End()
 
 def Create_Robot():
     """
-    Create a URDF file named 'body.urdf' containing a single cube.
+    Create a URDF file named 'body.urdf' containing a robot.
     """
     pyrosim.Start_URDF("body.urdf")
     pyrosim.Send_Cube(name="Link0", pos=[0,0,0.5], size=[1,1,1])
@@ -33,6 +33,62 @@ def Create_Robot():
     pyrosim.Send_Cube(name="Link6", pos=[0,0,-0.5], size=[1,1,1])
     pyrosim.End()
 
+# def Create_Robot_Three_Link_Two_Joint():
+#     """
+#     Create a URDF file named 'tltj.urdf' containing a Three Link Two Joint Robot.
+#     """
+#     pyrosim.Start_URDF("tltj.urdf")
+#     pyrosim.Send_Cube(name="Torso", pos=[1.5,0.0,1.5], size=[1,1,1])
+#     pyrosim.Send_Joint(name="Torso_BackLeg", parent="Torso", child="BackLeg", type="revolute", position=[1.0,0.0,1.0])
+#     pyrosim.Send_Cube(name="BackLeg", pos=[-0.5,0.0,-0.5], size=[1,1,1])
+#     pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso", child="FrontLeg", type="revolute", position=[1.0,0.0,0.0])
+#     pyrosim.Send_Cube(name="FrontLeg", pos=[0.5,0.0,-0.5], size=[1,1,1])
+#     pyrosim.End()
+
+def Create_ThreeLinkTwoJoint():
+    pyrosim.Start_URDF("three_link.urdf")
+
+    # Root link (Torso) has absolute position.
+    pyrosim.Send_Cube(
+        name="Torso",
+        pos=[1.5, 1.5, 0.5],  # absolute coords
+        size=[1,1,1]
+    )
+
+    # First joint: Torso -> BackLeg (joint is also in absolute coords)
+    pyrosim.Send_Joint(
+        name="Torso_BackLeg",
+        parent="Torso",
+        child="BackLeg",
+        type="revolute",
+        position=[1.0, 1.0, 0.5]  # absolute
+    )
+
+    # BackLeg is positioned RELATIVE to that joint
+    pyrosim.Send_Cube(
+        name="BackLeg",
+        pos=[-0.5, -0.5, 0],    # relative
+        size=[1,1,1]
+    )
+
+    # Second joint: Torso -> FrontLeg (again, absolute coords for the joint)
+    pyrosim.Send_Joint(
+        name="Torso_FrontLeg",
+        parent="Torso",
+        child="FrontLeg",
+        type="revolute",
+        position=[2.0, 1.0, 0.5]  # absolute
+    )
+
+    # FrontLeg is positioned RELATIVE to that joint
+    pyrosim.Send_Cube(
+        name="FrontLeg",
+        pos=[0.5, -0.5, 0],  # relative
+        size=[1,1,1]
+    )
+
+    pyrosim.End()
+
 if __name__ == '__main__':
     Create_World()
-    Create_Robot()
+    # Create_Robot_Three_Link_Two_Joint()

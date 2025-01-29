@@ -7,6 +7,10 @@ sets gravity, and continuously steps through the simulation loop.
 import pybullet as p
 import pybullet_data
 import time
+import generate as g
+
+g.Create_World()
+g.Create_ThreeLinkTwoJoint()
 
 running = True
 
@@ -17,7 +21,7 @@ p.setGravity(0,0,-9.8)
 p.loadSDF("world.sdf")
 
 planeId = p.loadURDF("plane.urdf")
-robotID = p.loadURDF("body.urdf")
+robotID = p.loadURDF("tltj.urdf")
 
 while running:
     p.stepSimulation()
