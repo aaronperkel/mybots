@@ -51,7 +51,7 @@ def Create_ThreeLinkTwoJoint():
     # Root link (Torso) has absolute position.
     pyrosim.Send_Cube(
         name="Torso",
-        pos=[1.5, 1.5, 0.5],  # absolute coords
+        pos=[1.5, 0.5, 1.5],  # absolute coords
         size=[1,1,1]
     )
 

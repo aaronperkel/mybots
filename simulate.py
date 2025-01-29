@@ -21,7 +21,7 @@ p.setGravity(0,0,-9.8)
 p.loadSDF("world.sdf")
 
 planeId = p.loadURDF("plane.urdf")
-robotID = p.loadURDF("tltj.urdf")
+robotID = p.loadURDF("three_link.urdf")
 
 while running:
     p.stepSimulation()
