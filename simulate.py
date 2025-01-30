@@ -6,6 +6,7 @@ sets gravity, and continuously steps through the simulation loop.
 
 import pybullet as p
 import pybullet_data
+import pyrosim.pyrosim as pyrosim
 import time
 
 def main():
@@ -18,10 +19,13 @@ def main():
     p.loadSDF("world.sdf")
 
     planeId = p.loadURDF("plane.urdf")
-    robotID = p.loadURDF("three_link.urdf")
+    robotId = p.loadURDF("three_link.urdf")
 
+    pyrosim.Prepare_To_Simulate(robotId)
     while running:
         p.stepSimulation()
+        # Adding a touch sensor to the back leg
+        backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
         time.sleep(.005)
 
     p.disconnect()
