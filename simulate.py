@@ -8,8 +8,10 @@ import pybullet as p
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import time
+import generate as g
 
 def main():
+    g.main()
     running = True
 
     physicsClient = p.connect(p.GUI)
@@ -26,6 +28,7 @@ def main():
         p.stepSimulation()
         # Adding a touch sensor to the back leg
         backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
+        print(backLegTouch)
         time.sleep(.005)
 
     p.disconnect()

@@ -162,7 +162,9 @@ def Create_ThreeLinkTwoJoint():
 
     pyrosim.End()
 
-if __name__ == '__main__':
+def main():
     Create_World()
     Create_ThreeLinkTwoJoint()
-    s.main()
+
+if __name__ == '__main__':
+    main()
