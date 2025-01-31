@@ -12,7 +12,7 @@ import generate as g
 import numpy as np
 
 def main():
-    STEPS = 10000
+    STEPS = 1000
     g.main()
 
     physicsClient = p.connect(p.GUI)
@@ -34,8 +34,7 @@ def main():
         time.sleep(.005)
 
     p.disconnect()
-
-    print(backLegSensorValues)
+    np.save('data/backLegSensorValues.npy', backLegSensorValues)
 
 if __name__ == '__main__':
     main()
