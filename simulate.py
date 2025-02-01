@@ -39,7 +39,15 @@ def main():
             bodyIndex = robotId,
             jointName = "Torso_BackLeg",
             controlMode = p.POSITION_CONTROL,
-            targetPosition = 0.0,
+            targetPosition = -np.pi/3,
+            maxForce = 500
+        )
+
+        pyrosim.Set_Motor_For_Joint(
+            bodyIndex = robotId,
+            jointName = "Torso_FrontLeg",
+            controlMode = p.POSITION_CONTROL,
+            targetPosition = np.pi/3,
             maxForce = 500
         )
 
