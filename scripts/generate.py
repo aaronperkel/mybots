@@ -3,7 +3,7 @@ generate.py
 Script to create SDF/URDF files for your robot using pyrosim.
 """
 
-import pyrosim.pyrosim as pyrosim
+from pyrosim import pyrosim
 
 
 def create_world():

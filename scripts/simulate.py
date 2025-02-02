@@ -10,8 +10,8 @@ import pybullet as p
 import pybullet_data
 import numpy as np
 
-import pyrosim.pyrosim as pyrosim
-import scripts.generate as generate
+from pyrosim import pyrosim
+from scripts import generate
 
 
 def main():
