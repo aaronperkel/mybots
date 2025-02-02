@@ -9,6 +9,7 @@ import time
 import pybullet as p
 import pybullet_data
 import numpy as np
+import random
 
 from pyrosim import pyrosim
 from scripts import generate
@@ -49,16 +50,16 @@ def main():
             bodyIndex=robot_id,
             jointName="Torso_BackLeg",
             controlMode=p.POSITION_CONTROL,
-            targetPosition=-np.pi / 3,
-            maxForce=500,
+            targetPosition=random_in_range(-np.pi/2, np.pi/2),
+            maxForce=20,
         )
 
         pyrosim.Set_Motor_For_Joint(
             bodyIndex=robot_id,
             jointName="Torso_FrontLeg",
             controlMode=p.POSITION_CONTROL,
-            targetPosition=np.pi / 3,
-            maxForce=500,
+            targetPosition=random_in_range(-np.pi/2, np.pi/2),
+            maxForce=20,
         )
 
         time.sleep(0.005)
@@ -68,6 +69,10 @@ def main():
     # Save sensor arrays for analysis
     np.save("data/backLegSensorValues.npy", back_leg_vals)
     np.save("data/frontLegSensorValues.npy", front_leg_vals)
+
+
+def random_in_range(low, high):
+    return low + (high - low) * random.random()
 
 
 if __name__ == "__main__":
