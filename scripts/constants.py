@@ -1,6 +1,7 @@
 """
 constants.py
-Constants for the codebase
+Holds global constants such as the number of simulation steps, motor frequencies, amplitudes,
+and other physical constants (gravity, max force, etc.).
 """
 
 import numpy as np

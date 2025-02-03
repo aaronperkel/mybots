@@ -1,6 +1,6 @@
 """
 generate.py
-Script to create SDF/URDF files for your robot using pyrosim.
+Contains methods for programmatically generating SDF and URDF files for the robot(s) and environment.
 """
 
 from pyrosim import pyrosim
