@@ -19,7 +19,7 @@ def main():
     """
     Main function to create the world/robot, load them in PyBullet, and simulate.
     """
-    steps = 1000
+    steps = 10000
     # Generate the world and a sample 3-link robot
     generate.main()
 
@@ -39,6 +39,12 @@ def main():
 
     back_leg_vals = np.zeros(steps)
     front_leg_vals = np.zeros(steps)
+
+    angles = np.linspace(0, 2*np.pi, steps)
+    target_angles = np.sin(angles)
+
+    np.save("data/sin_values.npy", target_angles)
+    exit()
 
     for i in range(steps):
         p.stepSimulation()
