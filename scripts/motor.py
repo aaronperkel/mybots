@@ -33,3 +33,6 @@ class MOTOR:
                 targetPosition=target_position,
                 maxForce=c.MAX_FORCE,
             )
+        
+    def Save_Values(self):
+        np.save(f'data/{self.joint_name}_motor_values.npy', self.values)

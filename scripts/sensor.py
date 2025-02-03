@@ -21,6 +21,6 @@ class SENSOR:
         Gets the value of the sensor and stores it in a dictionary
         """
         self.values[t] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.link_name)
-        # BUG: this only works with -2 and not -1?
-        if t == c.STEPS - 2:
-            print(self.values)
+
+    def Save_Values(self):
+        np.save(f'data/{self.link_name}_sensor_values.npy', self.values)
