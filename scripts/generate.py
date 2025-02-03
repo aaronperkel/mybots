@@ -123,13 +123,64 @@ def create_three_link_two_joint():
     pyrosim.End()
 
 
+def Generate_Body():
+    """
+    Creates a 3-link robot with two revolute joints.
+    """
+    pyrosim.Start_URDF("data/body.urdf")
+
+    pyrosim.Send_Cube(
+        name="Torso",
+        pos=[1.5, 0.0, 1.5],
+        size=[1, 1, 1]
+    )
+
+    # First joint: Torso -> BackLeg
+    pyrosim.Send_Joint(
+        name="Torso_BackLeg",
+        parent="Torso",
+        child="BackLeg",
+        type="revolute",
+        position=[1.0, 0.0, 0.5],
+    )
+    pyrosim.Send_Cube(
+        name="BackLeg",
+        pos=[-0.5, 0.0, 0],
+        size=[1, 1, 1]
+    )
+
+    # Second joint: Torso -> FrontLeg
+    pyrosim.Send_Joint(
+        name="Torso_FrontLeg",
+        parent="Torso",
+        child="FrontLeg",
+        type="revolute",
+        position=[2.0, 0.0, 0.5],
+    )
+    pyrosim.Send_Cube(
+        name="FrontLeg",
+        pos=[0.5, 0.0, 0],
+        size=[1, 1, 1]
+    )
+
+    pyrosim.End()
+
+
+def Generate_Brain():
+    """
+    Creates a brain.
+    """
+    pyrosim.Start_NeuralNetwork("data/brain.nndf")
+    pyrosim.Send_Sensor_Neuron(name=0 , linkName="Torso")
+    pyrosim.End()
+
+
 def main():
     """
-    Main function to create both the world and the robot, 
-    plus the three-link version.
+    Main function to create both the robot
     """
-    create_world()
-    create_three_link_two_joint()
+    Generate_Body()
+    Generate_Brain()
 
 
 if __name__ == "__main__":

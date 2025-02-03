@@ -11,7 +11,7 @@ from motor import MOTOR
 
 class ROBOT:
     def __init__(self):
-        self.robot_id = p.loadURDF("data/three_link.urdf")
+        self.robot_id = p.loadURDF("data/body.urdf")
         pyrosim.Prepare_To_Simulate(self.robot_id)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
@@ -33,3 +33,6 @@ class ROBOT:
     def Act(self, t):
         for _, motor_obj in self.motors.items():
             motor_obj.Set_Value(t, self.robot_id)
+
+    def Think(self):
+        pass
