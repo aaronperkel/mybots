@@ -4,16 +4,17 @@ Defines the SIMULATION class, which configures PyBullet, loads the world and rob
 runs the simulation loop, and orchestrates sensing and action each timestep.
 """
 
+import constants as c
+import pybullet as p
+import pybullet_data
+import numpy as np
+import time
+
+from world import WORLD
+from robot import ROBOT
+
 class SIMULATION:
     def __init__(self):
-        import constants as c
-        import pybullet as p
-        import pybullet_data
-        import numpy as np
-
-        from world import WORLD
-        from robot import ROBOT
-
         c.STEPS = 1000
 
         c.AMPLITUDE_BL = np.pi/3
@@ -33,15 +34,9 @@ class SIMULATION:
         self.robot = ROBOT()
 
     def __del__(self):
-        import pybullet as p
-        
         p.disconnect()
 
     def Run(self):
-        import constants as c
-        import pybullet as p
-        import time
-
         for i in range(c.STEPS):
             p.stepSimulation()
             self.robot.Sense(i)

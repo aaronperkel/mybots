@@ -17,7 +17,7 @@ ignore=
 # F0401 Unable to import module
 # W0511 TODO
 # PyLint's import module can give false negatives
-disable=F0401,W0511,E0401,I1101
+disable=F0401,W0511,E0401,I1101,R0903
 
 #   R0903 = Too few public methods
 #   R0914 = Too many local variables
