@@ -6,7 +6,7 @@ and other physical constants (gravity, max force, etc.).
 
 import numpy as np
 
-STEPS = 1000
+STEPS = 10000
 
 AMPLITUDE_BL = np.pi/3
 FREQUENCY_BL = 10

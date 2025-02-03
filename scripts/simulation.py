@@ -15,16 +15,6 @@ from robot import ROBOT
 
 class SIMULATION:
     def __init__(self):
-        c.STEPS = 1000
-
-        c.AMPLITUDE_BL = np.pi/3
-        c.FREQUENCY_BL = 10
-        c.PHASE_OFFSET_BL = 0
-
-        c.AMPLITUDE_FL = np.pi/4
-        c.FREQUENCY_FL = 10
-        c.PHASE_OFFSET_FL = np.pi
-
         self.physics_client = p.connect(p.GUI)
         p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
