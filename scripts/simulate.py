@@ -20,9 +20,14 @@ def main():
     Main function to create the world/robot, load them in PyBullet, and simulate.
     """
     STEPS = 1000
-    AMPLITUDE = np.pi/4
-    FREQUENCY = 8
-    PHASE_OFFSET = 0
+
+    AMPLITUDE_BL = np.pi/3
+    FREQUENCY_BL = 10
+    PHASE_OFFSET_BL = 0
+
+    AMPLITUDE_FL = np.pi/4
+    FREQUENCY_FL = 10
+    PHASE_OFFSET_FL = np.pi
 
     # Generate the world and a sample 3-link robot
     generate.main()
@@ -42,11 +47,14 @@ def main():
     pyrosim.Prepare_To_Simulate(robot_id)
 
     i_vals = np.arange(STEPS)
-    target_angles = AMPLITUDE * np.sin(2 * np.pi * FREQUENCY * i_vals / STEPS + PHASE_OFFSET)
+    target_angles_bl = AMPLITUDE_BL * np.sin(2 * np.pi * FREQUENCY_BL * i_vals / STEPS + PHASE_OFFSET_BL)
+    target_angles_fl = AMPLITUDE_FL * np.sin(2 * np.pi * FREQUENCY_FL * i_vals / STEPS + PHASE_OFFSET_FL)
 
     back_leg_vals = np.zeros(STEPS)
     front_leg_vals = np.zeros(STEPS)
-    # np.save("data/sin_values.npy", target_angles)
+
+    # np.save("data/sin_values_bl.npy", target_angles_bl)
+    # np.save("data/sin_values_fl.npy", target_angles_fl)
     # exit()
 
     for i in range(STEPS):
@@ -59,7 +67,7 @@ def main():
             bodyIndex=robot_id,
             jointName="Torso_BackLeg",
             controlMode=p.POSITION_CONTROL,
-            targetPosition=target_angles[i],
+            targetPosition=target_angles_bl[i],
             maxForce=20,
         )
 
@@ -67,7 +75,7 @@ def main():
             bodyIndex=robot_id,
             jointName="Torso_FrontLeg",
             controlMode=p.POSITION_CONTROL,
-            targetPosition=target_angles[i],
+            targetPosition=target_angles_fl[i],
             maxForce=20,
         )
 
