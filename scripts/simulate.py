@@ -13,21 +13,22 @@ import random
 
 from pyrosim import pyrosim
 from scripts import generate
+import constants as c
 
 
 def main():
     """
     Main function to create the world/robot, load them in PyBullet, and simulate.
     """
-    STEPS = 1000
+    c.STEPS = 1000
 
-    AMPLITUDE_BL = np.pi/3
-    FREQUENCY_BL = 10
-    PHASE_OFFSET_BL = 0
+    c.AMPLITUDE_BL = np.pi/3
+    c.FREQUENCY_BL = 10
+    c.PHASE_OFFSET_BL = 0
 
-    AMPLITUDE_FL = np.pi/4
-    FREQUENCY_FL = 10
-    PHASE_OFFSET_FL = np.pi
+    c.AMPLITUDE_FL = np.pi/4
+    c.FREQUENCY_FL = 10
+    c.PHASE_OFFSET_FL = np.pi
 
     # Generate the world and a sample 3-link robot
     generate.main()
@@ -35,7 +36,7 @@ def main():
     physics_client = p.connect(p.GUI)
     p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
     p.setAdditionalSearchPath(pybullet_data.getDataPath())
-    p.setGravity(0, 0, -9.8)
+    p.setGravity(c.GRAV_X, c.GRAV_Y, c.GRAV_Z)
 
     # Because generate.py wrote 'world.sdf' in data/ but we load it here:
     # either move or rename to load the correct path
@@ -46,18 +47,18 @@ def main():
 
     pyrosim.Prepare_To_Simulate(robot_id)
 
-    i_vals = np.arange(STEPS)
-    target_angles_bl = AMPLITUDE_BL * np.sin(2 * np.pi * FREQUENCY_BL * i_vals / STEPS + PHASE_OFFSET_BL)
-    target_angles_fl = AMPLITUDE_FL * np.sin(2 * np.pi * FREQUENCY_FL * i_vals / STEPS + PHASE_OFFSET_FL)
+    i_vals = np.arange(c.STEPS)
+    target_angles_bl = c.AMPLITUDE_BL * np.sin(2 * np.pi * c.FREQUENCY_BL * i_vals / c.STEPS + c.PHASE_OFFSET_BL)
+    target_angles_fl = c.AMPLITUDE_FL * np.sin(2 * np.pi * c.FREQUENCY_FL * i_vals / c.STEPS + c.PHASE_OFFSET_FL)
 
-    back_leg_vals = np.zeros(STEPS)
-    front_leg_vals = np.zeros(STEPS)
+    back_leg_vals = np.zeros(c.STEPS)
+    front_leg_vals = np.zeros(c.STEPS)
 
     # np.save("data/sin_values_bl.npy", target_angles_bl)
     # np.save("data/sin_values_fl.npy", target_angles_fl)
     # exit()
 
-    for i in range(STEPS):
+    for i in range(c.STEPS):
         p.stepSimulation()
 
         back_leg_vals[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
@@ -68,7 +69,7 @@ def main():
             jointName="Torso_BackLeg",
             controlMode=p.POSITION_CONTROL,
             targetPosition=target_angles_bl[i],
-            maxForce=20,
+            maxForce=c.MAX_FORCE,
         )
 
         pyrosim.Set_Motor_For_Joint(
@@ -76,10 +77,10 @@ def main():
             jointName="Torso_FrontLeg",
             controlMode=p.POSITION_CONTROL,
             targetPosition=target_angles_fl[i],
-            maxForce=20,
+            maxForce=c.MAX_FORCE,
         )
 
-        time.sleep(0.005)
+        time.sleep(c.SLEEP_TIME)
 
     p.disconnect()
 
