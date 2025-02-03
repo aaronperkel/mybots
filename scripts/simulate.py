@@ -19,7 +19,11 @@ def main():
     """
     Main function to create the world/robot, load them in PyBullet, and simulate.
     """
-    steps = 1000
+    STEPS = 1000
+    AMPLITUDE = np.pi/4
+    FREQUENCY = 8
+    PHASE_OFFSET = 0
+
     # Generate the world and a sample 3-link robot
     generate.main()
 
@@ -37,16 +41,15 @@ def main():
 
     pyrosim.Prepare_To_Simulate(robot_id)
 
-    back_leg_vals = np.zeros(steps)
-    front_leg_vals = np.zeros(steps)
+    i_vals = np.arange(STEPS)
+    target_angles = AMPLITUDE * np.sin(2 * np.pi * FREQUENCY * i_vals / STEPS + PHASE_OFFSET)
 
-    angles = np.linspace(0, 2*np.pi, steps)
-    target_angles = np.sin(angles) * (np.pi / 4)
+    back_leg_vals = np.zeros(STEPS)
+    front_leg_vals = np.zeros(STEPS)
+    # np.save("data/sin_values.npy", target_angles)
+    # exit()
 
-    np.save("data/sin_values.npy", target_angles)
-    exit()
-
-    for i in range(steps):
+    for i in range(STEPS):
         p.stepSimulation()
 
         back_leg_vals[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
@@ -56,7 +59,7 @@ def main():
             bodyIndex=robot_id,
             jointName="Torso_BackLeg",
             controlMode=p.POSITION_CONTROL,
-            targetPosition=random_in_range(-np.pi/2, np.pi/2),
+            targetPosition=target_angles[i],
             maxForce=20,
         )
 
@@ -64,7 +67,7 @@ def main():
             bodyIndex=robot_id,
             jointName="Torso_FrontLeg",
             controlMode=p.POSITION_CONTROL,
-            targetPosition=random_in_range(-np.pi/2, np.pi/2),
+            targetPosition=target_angles[i],
             maxForce=20,
         )
 
