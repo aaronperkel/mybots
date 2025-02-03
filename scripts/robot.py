@@ -8,11 +8,13 @@ import pybullet as p
 from pyrosim import pyrosim
 from sensor import SENSOR
 from motor import MOTOR
+from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 class ROBOT:
     def __init__(self):
         self.robot_id = p.loadURDF("data/body.urdf")
         pyrosim.Prepare_To_Simulate(self.robot_id)
+        self.nn = NEURAL_NETWORK("data/brain.nndf")
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
@@ -35,4 +37,4 @@ class ROBOT:
             motor_obj.Set_Value(t, self.robot_id)
 
     def Think(self):
-        pass
+        self.nn.Update()

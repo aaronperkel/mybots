@@ -12,7 +12,6 @@ import time
 
 from world import WORLD
 from robot import ROBOT
-from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 class SIMULATION:
     def __init__(self):
