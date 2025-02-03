@@ -9,7 +9,7 @@ import numpy as np
 STEPS = 10000
 
 AMPLITUDE_BL = np.pi/3
-FREQUENCY_BL = 10
+FREQUENCY_BL = 100
 PHASE_OFFSET_BL = 0
 
 AMPLITUDE_FL = np.pi/4
