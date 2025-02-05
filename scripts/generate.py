@@ -4,6 +4,11 @@ Contains methods for programmatically generating SDF and URDF files for the robo
 """
 
 from pyrosim import pyrosim
+import os
+
+
+if not os.path.exists("data"):
+    os.makedirs("data")
 
 
 def create_world():
