@@ -22,9 +22,9 @@ class MOTOR:
         i_vals = np.arange(c.STEPS)
         self.motor_values = self.AMPLITUDE * np.sin(2 * np.pi * self.FREQUENCY * i_vals / c.STEPS + self.OFFSET)
 
-    def Set_Value(self, t, robot_id):
+    def Set_Value(self, desiredAngle, robot_id):
         self.robot_id = robot_id
-        target_position = self.motor_values[t]
+        target_position = desiredAngle
 
         pyrosim.Set_Motor_For_Joint(
                 bodyIndex=self.robot_id,
