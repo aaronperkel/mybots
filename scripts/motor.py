@@ -12,15 +12,6 @@ from pyrosim import pyrosim
 class MOTOR:
     def __init__(self, joint_name):
         self.joint_name = joint_name
-        self.Prepare_To_Act()
-
-    def Prepare_To_Act(self):
-        self.AMPLITUDE = c.AMPLITUDE_BL
-        self.FREQUENCY = c.FREQUENCY_BL
-        self.OFFSET = c.PHASE_OFFSET_BL
-
-        i_vals = np.arange(c.STEPS)
-        self.motor_values = self.AMPLITUDE * np.sin(2 * np.pi * self.FREQUENCY * i_vals / c.STEPS + self.OFFSET)
 
     def Set_Value(self, desiredAngle, robot_id):
         self.robot_id = robot_id
@@ -33,6 +24,3 @@ class MOTOR:
                 targetPosition=target_position,
                 maxForce=c.MAX_FORCE,
             )
-        
-    def Save_Values(self):
-        np.save(f'data/{self.joint_name}_motor_values.npy', self.values)
