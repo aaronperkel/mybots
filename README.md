@@ -31,12 +31,12 @@ pip install -r requirements.txt
 python setup.py install
 ```
 
-## Running the Simulation
-```bash
-python scripts/simulate.py
-```
-
 ## Generate URDF/SDF Files
 ```bash
 python scripts/generate.py
+```
+
+## Running the Simulation
+```bash
+python scripts/simulate.py
 ```

@@ -193,6 +193,7 @@ def main():
     """
     Main function to create both the robot
     """
+    create_world()
     Generate_Body()
     Generate_Brain()
 
