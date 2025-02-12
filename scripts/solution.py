@@ -23,6 +23,8 @@ class SOLUTION:
             f.close()
 
     def Create_World(self):
+        if not os.path.exists("data"):
+            os.makedirs("data")
         pyrosim.Start_SDF("data/world.sdf")
         pyrosim.Send_Cube(name="Box", pos=[-4, 4, 0.5], size=[1, 1, 1])
         pyrosim.End()
