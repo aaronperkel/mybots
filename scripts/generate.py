@@ -8,10 +8,6 @@ import random
 import os
 
 
-if not os.path.exists("data"):
-    os.makedirs("data")
-
-
 def create_world():
     """
     Create an SDF file named 'world.sdf' containing a single cube.
@@ -199,4 +195,6 @@ def main():
 
 
 if __name__ == "__main__":
+    if not os.path.exists("data"):
+        os.makedirs("data")
     main()
