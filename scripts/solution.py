@@ -4,6 +4,7 @@ solution.py
 
 import numpy as np
 from pyrosim import pyrosim
+import os
 
 class SOLUTION:
     def __init__(self):
@@ -11,7 +12,10 @@ class SOLUTION:
         self.weights = self.weights * 2 - 1
 
     def Evaluate(self):
-        pass
+        self.Create_World()
+        self.Create_Body()
+        self.Create_Brain()
+        os.system("python scripts/simulate.py")
 
     def Create_World(self):
         pyrosim.Start_SDF("data/world.sdf")
