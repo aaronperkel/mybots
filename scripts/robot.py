@@ -49,3 +49,4 @@ class ROBOT:
         self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
         with open('data/fitness.txt', 'w') as f:
             f.write(str(self.xCoordinateOfLinkZero))
+            f.close()
