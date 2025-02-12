@@ -36,4 +36,4 @@ class HILL_CLIMBER:
             self.parent = self.child
     
     def Print(self):
-        print(f'\nParent: {self.parent.fitness} Child: {self.child.fitness}')
+        print(f'\n\nParent: {self.parent.fitness} Child: {self.child.fitness}\n')

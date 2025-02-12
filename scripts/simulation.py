@@ -14,8 +14,11 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self):
-        self.physics_client = p.connect(p.DIRECT)
+    def __init__(self, directOrGUI):
+        if directOrGUI == 'GUI':
+            self.physics_client = p.connect(p.GUI)
+        else:
+            self.physics_client = p.connect(p.DIRECT)
         p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(c.GRAV_X, c.GRAV_Y, c.GRAV_Z)
