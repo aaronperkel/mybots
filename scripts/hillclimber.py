@@ -15,14 +15,13 @@ class HILL_CLIMBER:
 
     def Evolve(self):
         self.parent.Evaluate()
-        for current_generation in range(c.NUMBER_OF_GENERATIONS - 1):
+        for current_generation in range(c.NUMBER_OF_GENERATIONS):
             self.Evolve_For_One_Generation()
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
         self.child.Evaluate()
-        exit()
         self.Select()
 
     def Spawn(self):
