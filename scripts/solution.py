@@ -5,6 +5,7 @@ solution.py
 import numpy as np
 from pyrosim import pyrosim
 import os
+import random
 
 class SOLUTION:
     def __init__(self):
@@ -79,3 +80,8 @@ class SOLUTION:
                                      targetNeuronName=currentColumn+3, 
                                      weight=self.weights[currentRow][currentColumn])
         pyrosim.End()
+
+    def Mutate(self):
+        rand_row = random.randint(0, 2)
+        rand_col = random.randint(0, 1)
+        self.weights[rand_row,rand_col] = random.random() * 2 - 1
