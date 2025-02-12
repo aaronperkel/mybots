@@ -12,6 +12,7 @@ def main():
     """
     simulation = SIMULATION()
     simulation.Run()
+    simulation.Get_Fitness()
 
 if __name__ == '__main__':
     main()
