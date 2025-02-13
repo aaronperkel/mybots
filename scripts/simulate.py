@@ -12,7 +12,7 @@ import numpy as np
 import random
 
 from pyrosim import pyrosim
-from scripts import generate
+import generate
 
 
 def main():
