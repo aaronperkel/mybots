@@ -6,16 +6,16 @@ and other physical constants (gravity, max force, etc.).
 
 import numpy as np
 
-STEPS = 4000
+STEPS = 1000
 
 NUMBER_OF_GENERATIONS = 40
 
-AMPLITUDE_BL = np.pi/3
-FREQUENCY_BL = 10
+AMPLITUDE_BL = 1.0
+FREQUENCY_BL = 2.0
 PHASE_OFFSET_BL = 0
 
-AMPLITUDE_FL = np.pi/4
-FREQUENCY_FL = 10
+AMPLITUDE_FL = 1.0
+FREQUENCY_FL = 2.0
 PHASE_OFFSET_FL = np.pi
 
 GRAV_X = 0
