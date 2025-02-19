@@ -86,7 +86,6 @@ def Generate_Body():
     Creates a 3-link robot with two revolute joints.
     """
     pyrosim.Start_URDF("data/body.urdf")
-    pyrosim.Start_URDF("data/body.urdf")
 
     pyrosim.Send_Cube(
         name="Torso",
