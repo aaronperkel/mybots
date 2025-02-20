@@ -19,8 +19,13 @@ class MOTOR:
         self.FREQUENCY = c.FREQUENCY_BL
         self.OFFSET = c.PHASE_OFFSET_BL
 
+        if self.joint_name == "Torso_FrontLeg":
+            frequency = self.FREQUENCY / 2
+        else:
+            frequency = self.FREQUENCY
+
         i_vals = np.arange(c.STEPS)
-        self.motor_values = self.AMPLITUDE * np.sin(2 * np.pi * self.FREQUENCY * i_vals / c.STEPS + self.OFFSET)
+        self.motor_values = self.AMPLITUDE * np.sin(2 * np.pi * frequency * i_vals / c.STEPS + self.OFFSET)
 
     def Set_Value(self, t, robot_id):
         self.robot_id = robot_id
