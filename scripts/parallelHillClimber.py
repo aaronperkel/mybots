@@ -11,8 +11,9 @@ import copy
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        # self.parent = SOLUTION()
-        pass
+        self.parents = {}
+        for i in range(c.POPULATION_SIZE):
+            self.parents[i] = SOLUTION()
 
     def Evolve(self):
         # self.parent.Evaluate('DIRECT')
