@@ -12,8 +12,8 @@ import os
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        os.system('rm data/brain*.nndf')
-        os.system('rm data/fitness*.txt')
+        os.system('rm -f data/brain*.nndf')
+        os.system('rm -f data/fitness*.txt')
         self.nextAvailableID = 0
         self.parents = {}
         for i in range(c.POPULATION_SIZE):
