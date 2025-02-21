@@ -19,7 +19,9 @@ class PARALLEL_HILL_CLIMBER:
 
     def Evolve(self):
         for parent in self.parents.values():
-            parent.Evaluate('DIRECT')
+            parent.Start_Simulation('DIRECT')
+        for parent in self.parents.values():
+            parent.Wait_For_Simulation_To_End()
         # for i in range(c.NUMBER_OF_GENERATIONS):
         #     self.Evolve_For_One_Generation()
         #     # Create a simple progress bar (50 characters wide)

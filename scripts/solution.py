@@ -6,6 +6,7 @@ import numpy as np
 from pyrosim import pyrosim
 import os
 import random
+import time
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
@@ -13,15 +14,21 @@ class SOLUTION:
         self.weights = np.random.rand(3, 2)
         self.weights = self.weights * 2 - 1
 
-    def Evaluate(self, directOrGUI='DIRECT'):
+    def Start_Simulation(self, directOrGUI='DIRECT'):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
         os.system(f"python scripts/simulate.py {directOrGUI} {self.myID} &>/dev/null &")
-        with open('data/fitness.txt', 'r') as f:
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists(f'data/fitness{self.myID}.txt'):
+            time.sleep(0.01)
+        with open(f'data/fitness{self.myID}.txt', 'r') as f:
             self.fitness = f.read()
             self.fitness = float(self.fitness)
             f.close()
+        os.system(f'rm data/fitness{self.myID}.txt')
+
 
     def Create_World(self):
         if not os.path.exists("data"):
