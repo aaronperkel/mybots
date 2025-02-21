@@ -7,7 +7,6 @@ runs the simulation loop, and orchestrates sensing and action each timestep.
 import constants as c
 import pybullet as p
 import pybullet_data
-import numpy as np
 import time
 
 from world import WORLD

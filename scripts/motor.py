@@ -5,7 +5,6 @@ It stores parameters for motion (amplitude, frequency, etc.) and commands the jo
 """
 
 import constants as c
-import numpy as np
 import pybullet as p
 from pyrosim import pyrosim
 

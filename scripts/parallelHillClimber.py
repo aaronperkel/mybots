@@ -16,6 +16,11 @@ class PARALLEL_HILL_CLIMBER:
         os.system('rm -f data/fitness*.txt')
         self.nextAvailableID = 0
         self.parents = {}
+
+        progress = int((1) / c.NUMBER_OF_GENERATIONS * 50)
+        bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
+        print(f'\rGeneration {1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
+        
         for i in range(c.POPULATION_SIZE):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
