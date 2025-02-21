@@ -9,19 +9,21 @@ from solution import SOLUTION
 import constants as c
 import copy
 
-class HILL_CLIMBER:
+class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        self.parent = SOLUTION()
+        # self.parent = SOLUTION()
+        pass
 
     def Evolve(self):
-        self.parent.Evaluate('DIRECT')
-        for i in range(c.NUMBER_OF_GENERATIONS):
-            self.Evolve_For_One_Generation()
-            # Create a simple progress bar (50 characters wide)
-            progress = int((i + 1) / c.NUMBER_OF_GENERATIONS * 50)
-            bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
-            print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
-        print()  # Move to the next line after completion
+        # self.parent.Evaluate('DIRECT')
+        # for i in range(c.NUMBER_OF_GENERATIONS):
+        #     self.Evolve_For_One_Generation()
+        #     # Create a simple progress bar (50 characters wide)
+        #     progress = int((i + 1) / c.NUMBER_OF_GENERATIONS * 50)
+        #     bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
+        #     print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
+        # print()  # Move to the next line after completion
+        pass
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
@@ -43,4 +45,5 @@ class HILL_CLIMBER:
         print(f'Parent: {self.parent.fitness} Child: {self.child.fitness}')
 
     def Show_Best(self):
-        self.parent.Evaluate('GUI')
+        # self.parent.Evaluate('GUI')
+        pass
