@@ -1,5 +1,5 @@
 """
-motor.py
+hillclimber.py
 Implements increasingly efficient, but increasingly complex 
 search methods to find good synaptic weights for a given 
 desired behavior.
@@ -15,8 +15,13 @@ class HILL_CLIMBER:
 
     def Evolve(self):
         self.parent.Evaluate('DIRECT')
-        for _ in range(c.NUMBER_OF_GENERATIONS):
+        for i in range(c.NUMBER_OF_GENERATIONS):
             self.Evolve_For_One_Generation()
+            # Create a simple progress bar (50 characters wide)
+            progress = int((i + 1) / c.NUMBER_OF_GENERATIONS * 50)
+            bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
+            print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
+        print()  # Move to the next line after completion
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
