@@ -1,5 +1,5 @@
 """
-motor.py
+hillclimber.py
 Implements increasingly efficient, but increasingly complex 
 search methods to find good synaptic weights for a given 
 desired behavior.
