@@ -8,9 +8,12 @@ desired behavior.
 from solution import SOLUTION
 import constants as c
 import copy
+import os
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
+        os.system('rm brain*.nndf')
+        os.system('rm fitness*.txt')
         self.nextAvailableID = 0
         self.parents = {}
         for i in range(c.POPULATION_SIZE):
@@ -18,12 +21,13 @@ class PARALLEL_HILL_CLIMBER:
             self.nextAvailableID += 1
 
     def Evolve(self):
-        for parent in self.parents.values():
-            parent.Start_Simulation('DIRECT')
-        for parent in self.parents.values():
-            parent.Wait_For_Simulation_To_End()
-        # for i in range(c.NUMBER_OF_GENERATIONS):
-        #     self.Evolve_For_One_Generation()
+        for self.parent in self.parents.values():
+            self.parent.Start_Simulation('DIRECT')
+        for self.parent in self.parents.values():
+            self.parent.Wait_For_Simulation_To_End()
+        for i in range(c.NUMBER_OF_GENERATIONS):
+            self.Evolve_For_One_Generation()
+            pass
         #     # Create a simple progress bar (50 characters wide)
         #     progress = int((i + 1) / c.NUMBER_OF_GENERATIONS * 50)
         #     bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
@@ -31,10 +35,16 @@ class PARALLEL_HILL_CLIMBER:
         # print()  # Move to the next line after completion
 
     def Evolve_For_One_Generation(self):
+        self.children = {}
+        for key, parent in self.parents.items():
+            child = copy.deepcopy(parent)
+            child.Set_ID(self.nextAvailableID)
+            self.nextAvailableID += 1
+            self.children[key] = child
         self.Spawn()
         self.Mutate()
-        self.child.Evaluate('DIRECT')
-        self.Select()
+        # self.child.Evaluate('DIRECT')
+        # self.Select()
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
@@ -42,7 +52,8 @@ class PARALLEL_HILL_CLIMBER:
         self.nextAvailableID += 1
 
     def Mutate(self):
-        self.child.Mutate()
+        for child in self.children.values():
+            child.Mutate()
 
     def Select(self):
         if self.parent.fitness > self.child.fitness:
