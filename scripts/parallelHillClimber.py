@@ -12,8 +12,8 @@ import os
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        os.system('rm brain*.nndf')
-        os.system('rm fitness*.txt')
+        os.system('rm data/brain*.nndf')
+        os.system('rm data/fitness*.txt')
         self.nextAvailableID = 0
         self.parents = {}
         for i in range(c.POPULATION_SIZE):
@@ -69,5 +69,7 @@ class PARALLEL_HILL_CLIMBER:
     print("")  # Blank line at the end
 
     def Show_Best(self):
-        # self.parent.Evaluate('GUI')
-        pass
+        # Find the parent with the lowest fitness
+        best = min(self.parents.values(), key=lambda sol: sol.fitness)
+        # Re-simulate that solution with graphics on.
+        best.Start_Simulation("GUI")
