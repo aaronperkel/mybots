@@ -14,6 +14,10 @@ class SOLUTION:
         self.weights = np.random.rand(3, 2)
         self.weights = self.weights * 2 - 1
 
+    def Evaluate(self, directOrGUI='DIRECT'):
+        self.Start_Simulation(directOrGUI)
+        self.Wait_For_Simulation_To_End()
+
     def Start_Simulation(self, directOrGUI='DIRECT'):
         self.Create_World()
         self.Create_Body()
