@@ -6,9 +6,11 @@ and other physical constants (gravity, max force, etc.).
 
 import numpy as np
 
-STEPS = 5000
+STEPS = 1000
 
-NUMBER_OF_GENERATIONS = 100
+NUMBER_OF_GENERATIONS = 25
+
+POPULATION_SIZE = 7
 
 AMPLITUDE_BL = 0.8
 FREQUENCY_BL = 1.5
