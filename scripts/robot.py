@@ -9,6 +9,7 @@ from pyrosim import pyrosim
 from sensor import SENSOR
 from motor import MOTOR
 from pyrosim.neuralNetwork import NEURAL_NETWORK
+import os
 
 class ROBOT:
     def __init__(self, solutionID):
@@ -17,6 +18,7 @@ class ROBOT:
         self.nn = NEURAL_NETWORK(f"data/brain{solutionID}.nndf")
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
+        os.system(f'rm data/brain{solutionID}.nndf')
 
     def Prepare_To_Sense(self):
         self.sensors = {}

@@ -17,7 +17,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system(f"python scripts/simulate.py {directOrGUI} &>/dev/null &")
+        os.system(f"python scripts/simulate.py {directOrGUI} {self.myID} &>/dev/null &")
         with open('data/fitness.txt', 'r') as f:
             self.fitness = f.read()
             self.fitness = float(self.fitness)
