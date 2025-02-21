@@ -8,7 +8,8 @@ import os
 import random
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, nextAvailableID):
+        self.myID = nextAvailableID
         self.weights = np.random.rand(3, 2)
         self.weights = self.weights * 2 - 1
 
@@ -87,3 +88,6 @@ class SOLUTION:
         rand_row = random.randint(0, 2)
         rand_col = random.randint(0, 1)
         self.weights[rand_row,rand_col] = random.random() * 2 - 1
+
+    def Set_ID(self, newID):
+        self.myID = newID
