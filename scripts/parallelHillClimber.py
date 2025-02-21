@@ -16,7 +16,8 @@ class PARALLEL_HILL_CLIMBER:
             self.parents[i] = SOLUTION()
 
     def Evolve(self):
-        # self.parent.Evaluate('DIRECT')
+        for parent in self.parents.values():
+            parent.Evaluate('DIRECT')
         # for i in range(c.NUMBER_OF_GENERATIONS):
         #     self.Evolve_For_One_Generation()
         #     # Create a simple progress bar (50 characters wide)
@@ -24,7 +25,6 @@ class PARALLEL_HILL_CLIMBER:
         #     bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
         #     print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
         # print()  # Move to the next line after completion
-        pass
 
     def Evolve_For_One_Generation(self):
         self.Spawn()

@@ -12,11 +12,11 @@ class SOLUTION:
         self.weights = np.random.rand(3, 2)
         self.weights = self.weights * 2 - 1
 
-    def Evaluate(self, directOrGUI='DIRECT', robot_id=0):
+    def Evaluate(self, directOrGUI='DIRECT'):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system(f"python scripts/simulate.py {directOrGUI} {robot_id} &>/dev/null ")
+        os.system(f"python scripts/simulate.py {directOrGUI} &>/dev/null &")
         with open('data/fitness.txt', 'r') as f:
             self.fitness = f.read()
             self.fitness = float(self.fitness)
