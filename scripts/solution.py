@@ -7,11 +7,12 @@ from pyrosim import pyrosim
 import os
 import random
 import time
+import constants as c
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
         self.myID = nextAvailableID
-        self.weights = np.random.rand(3, 2)
+        self.weights = np.random.rand(c.NUM_SENSOR_NEURONS, c.NUM_MOTOR_NEURONS)
         self.weights = self.weights * 2 - 1
 
     def Evaluate(self, directOrGUI='DIRECT'):
@@ -88,16 +89,16 @@ class SOLUTION:
         pyrosim.Send_Motor_Neuron(name=3, jointName="Torso_BackLeg")
         pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
-        for currentRow in range(3):
-            for currentColumn in range(2):
+        for currentRow in range(c.NUM_SENSOR_NEURONS):
+            for currentColumn in range(c.NUM_MOTOR_NEURONS):
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow, 
                                      targetNeuronName=currentColumn+3, 
                                      weight=self.weights[currentRow][currentColumn])
         pyrosim.End()
 
     def Mutate(self):
-        rand_row = random.randint(0, 2)
-        rand_col = random.randint(0, 1)
+        rand_row = random.randint(c.NUM_SENSOR_NEURONS)
+        rand_col = random.randint(c.NUM_MOTOR_NEURONS)
         self.weights[rand_row,rand_col] = random.random() * 2 - 1
 
     def Set_ID(self, newID):
