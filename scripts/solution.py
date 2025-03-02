@@ -57,12 +57,12 @@ class SOLUTION:
             parent="Torso",
             child="BackLeg",
             type="revolute",
-            position=[1.0, 0.0, 0.5],
+            position=[0.0, -0.5, 1.0],
         )
         pyrosim.Send_Cube(
             name="BackLeg",
-            pos=[-0.5, 0.0, 0],
-            size=[1, 1, 1]
+            pos=[0.0, -0.5, 0.0],
+            size=[0.2, 1.0, 0.2]
         )
 
         # Second joint: Torso -> FrontLeg
