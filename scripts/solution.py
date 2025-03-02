@@ -47,7 +47,7 @@ class SOLUTION:
 
         pyrosim.Send_Cube(
             name="Torso",
-            pos=[1.5, 0.0, 1.5],
+            pos=[0.0, 0.0, 1.0],
             size=[1, 1, 1]
         )
 
