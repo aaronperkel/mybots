@@ -58,6 +58,7 @@ class SOLUTION:
             child="BackLeg",
             type="revolute",
             position=[0.0, -0.5, 1.0],
+            jointAxis='0 1 0'
         )
         pyrosim.Send_Cube(
             name="BackLeg",
@@ -72,6 +73,7 @@ class SOLUTION:
             child="FrontLeg",
             type="revolute",
             position=[0, 0.5, 1.0],
+            jointAxis='0 1 0'
         )
         pyrosim.Send_Cube(
             name="FrontLeg",
