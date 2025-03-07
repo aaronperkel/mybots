@@ -42,6 +42,7 @@ class SOLUTION:
         pyrosim.Send_Cube(name="Box", pos=[-4, 4, 0.5], size=[1, 1, 1])
         pyrosim.End()
 
+
     def Create_Body(self):
         pyrosim.Start_URDF("data/body.urdf")
         
@@ -88,7 +89,7 @@ class SOLUTION:
             child="LeftLeg",
             type="revolute",
             position=[-0.5, 0.0, 1.0],
-            jointAxis='1 0 0'  # Changed from '0 1 0' to '1 0 0'
+            jointAxis='0 1 0' 
         )
         pyrosim.Send_Cube(
             name="LeftLeg",
@@ -123,8 +124,8 @@ class SOLUTION:
         )
         pyrosim.Send_Cube(
             name="FrontLowerLeg",
-            pos=[0.0, 0.5, 0.0],
-            size=[0.2, 1.0, 0.2]
+            pos=[0.0, 0.0, -0.5],
+            size=[0.2, 0.2, 1.0]
         )
         
         pyrosim.Send_Joint(
@@ -138,8 +139,8 @@ class SOLUTION:
         # Adjust the position of the BackLowerLeg so its top aligns with the joint:
         pyrosim.Send_Cube(
             name="BackLowerLeg",
-            pos=[0.0, -0.5, 0.0],
-            size=[0.2, 1.0, 0.2]
+            pos=[0.0, 0.0, -0.5],
+            size=[0.2, 0.2, 1.0]
         )
         
         # Left Lower Leg (attached to LeftLeg, use "0 1 0")
@@ -153,8 +154,8 @@ class SOLUTION:
         )
         pyrosim.Send_Cube(
             name="LeftLowerLeg",
-            pos=[-0.5, 0.0, 0.0],
-            size=[1.0, 0.2, 0.2]
+            pos=[0.0, 0.0, -0.5],
+            size=[0.2, 0.2, 1.0]
         )
 
         # Left Lower Leg (attached to LeftLeg, use "0 1 0")
@@ -168,8 +169,8 @@ class SOLUTION:
         )
         pyrosim.Send_Cube(
             name="RightLowerLeg",
-            pos=[-0.5, 0.0, 0.0],
-            size=[1.0, 0.2, 0.2]
+            pos=[0.0, 0.0, -0.5],
+            size=[0.2, 0.2, 1.0]
         )
         
         pyrosim.End()
