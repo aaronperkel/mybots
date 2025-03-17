@@ -34,7 +34,6 @@ class PARALLEL_HILL_CLIMBER:
             print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
             # self.Print()
         print()  # Move to the next line after completion
-        self.Print()
 
     def Evolve_For_One_Generation(self):
         self.children = {}
