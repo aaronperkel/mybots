@@ -11,8 +11,10 @@ def main():
     """
     Creates and runs the simulation
     """
-    directOrGUI = sys.argv[1]
-    simulation = SIMULATION(directOrGUI)
+    if len(sys.argv) > 1:
+        simulation = SIMULATION(sys.argv[1])
+    else:
+        simulation = SIMULATION('DIRECT')
     simulation.Run()
     simulation.Get_Fitness()
 
