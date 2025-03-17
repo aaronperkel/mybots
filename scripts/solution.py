@@ -43,7 +43,11 @@ class SOLUTION:
         pyrosim.End()
 
 
+
     def Create_Body(self):
+        """
+        Creates a 3-link robot with two revolute joints.
+        """
         pyrosim.Start_URDF("data/body.urdf")
         
         # Torso centered at (0,0,1)
@@ -76,6 +80,8 @@ class SOLUTION:
             position=[0.0, 0.5, 1.0],
             jointAxis='1 0 0'
         )
+
+
         pyrosim.Send_Cube(
             name="FrontLeg",
             pos=[0.0, 0.5, 0.0],

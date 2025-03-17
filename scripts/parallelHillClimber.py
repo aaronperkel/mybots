@@ -47,8 +47,10 @@ class PARALLEL_HILL_CLIMBER:
             child.Set_ID(self.nextAvailableID)
             self.nextAvailableID += 1
             self.children[key] = child
+        self.Mutate()
         self.Evaluate(self.children)
         self.Select()
+        self.Print()
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
@@ -71,7 +73,7 @@ class PARALLEL_HILL_CLIMBER:
             # Check if there's a corresponding child; if not, print "N/A"
             child_fitness = self.children[key].fitness if key in self.children else "N/A"
             print(f"Parent {key}: {parent_fitness}  Child {key}: {child_fitness}")
-    print("")  # Blank line at the end
+        print("")  # Blank line at the end
 
     def Show_Best(self):
         # Find the parent with the lowest fitness
