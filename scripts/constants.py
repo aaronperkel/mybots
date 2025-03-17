@@ -6,7 +6,7 @@ and other physical constants (gravity, max force, etc.).
 
 import numpy as np
 
-STEPS = 2500
+STEPS = 1500
 
 NUMBER_OF_GENERATIONS = 40
 
