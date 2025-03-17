@@ -34,6 +34,7 @@ class PARALLEL_HILL_CLIMBER:
             print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
             # self.Print()
         print()  # Move to the next line after completion
+        self.Print()
 
     def Evolve_For_One_Generation(self):
         self.children = {}
@@ -66,7 +67,7 @@ class PARALLEL_HILL_CLIMBER:
             # Check if there's a corresponding child; if not, print "N/A"
             child_fitness = self.children[key].fitness if key in self.children else "N/A"
             print(f"Parent {key}: {parent_fitness}  Child {key}: {child_fitness}")
-    print("")  # Blank line at the end
+        print("")  # Blank line at the end
 
     def Show_Best(self):
         # Find the parent with the lowest fitness
