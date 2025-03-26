@@ -47,10 +47,13 @@ class ROBOT:
         self.nn.Update()
 
     def Get_Fitness(self):
-        self.stateOfLinkZero = p.getLinkState(self.robot_id, 0)
-        self.positionOfLinkZero = self.stateOfLinkZero[0]
-        self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
+        # self.stateOfLinkZero = p.getLinkState(self.robot_id, 0)
+        # self.positionOfLinkZero = self.stateOfLinkZero[0]
+        # self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot_id)
+        basePosition = basePositionAndOrientation[0]
+        xPosition = basePosition[0]
         with open(f'data/tmp{self.solutionID}.txt', 'w') as f:
-            f.write(str(self.xCoordinateOfLinkZero))
+            f.write(str(xPosition))
             f.close()
         os.system(f'mv data/tmp{self.solutionID}.txt data/fitness{self.solutionID}.txt')

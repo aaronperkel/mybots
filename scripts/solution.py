@@ -214,7 +214,7 @@ class SOLUTION:
     def Mutate(self):
         rand_row = random.randint(0, c.NUM_SENSOR_NEURONS - 1)
         rand_col = random.randint(0, c.NUM_MOTOR_NEURONS - 1)
-        self.weights[rand_row,rand_col] = random.random() * 2 - 1
+        self.weights[rand_row,rand_col] = (random.random() * 2) - 1
 
     def Set_ID(self, newID):
         self.myID = newID
