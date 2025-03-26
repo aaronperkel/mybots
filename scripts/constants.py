@@ -6,8 +6,8 @@ and other physical constants (gravity, max force, etc.).
 
 STEPS = 5000
 
-NUMBER_OF_GENERATIONS = 30
-POPULATION_SIZE = 10
+NUMBER_OF_GENERATIONS = 5
+POPULATION_SIZE = 5
 
 NUM_SENSOR_NEURONS = 4
 NUM_MOTOR_NEURONS = 8
