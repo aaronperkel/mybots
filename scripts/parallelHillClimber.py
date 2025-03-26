@@ -50,7 +50,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Mutate()
         self.Evaluate(self.children)
         self.Select()
-        self.Print()
+        # self.Print()
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
