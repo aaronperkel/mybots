@@ -4,10 +4,10 @@ Holds global constants such as the number of simulation steps, motor frequencies
 and other physical constants (gravity, max force, etc.).
 """
 
-STEPS = 5000
+STEPS = 1000
 
-NUMBER_OF_GENERATIONS = 5
-POPULATION_SIZE = 5
+NUMBER_OF_GENERATIONS = 1
+POPULATION_SIZE = 1
 
 NUM_SENSOR_NEURONS = 4
 NUM_MOTOR_NEURONS = 8
