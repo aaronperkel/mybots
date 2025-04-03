@@ -9,8 +9,8 @@
 ### Milestone 1:
 - Objective: Modify solution.py to output multiple body.urdf files with offset positions.
 ### Milestone 2:
-- Modify simulate.py to load multiple URDF files and run the simulation for the swarm. I will provide a video proof of the swarm simulation.
+- Modify simulate.py to load multiple URDF files and run the simulation for the swarm.
 ### Milestone 3:
-- Introduce obstacles (blocks) in front of the swarm (as inspired by the Full Steam Ahead project) to cause some collisions. I’ll provide a video demonstrating this behavior.
+- Introduce obstacles (blocks) in front of the swarm (as inspired by the Full Steam Ahead project) to cause some collisions.
 ### Milestone 4:
-- Update the fitness function in robot.py to evaluate and reward the maximum distance traveled among the swarm members. Preliminary results and data comparisons will be included in my final submission.
+- Update the fitness function in robot.py to evaluate and reward the maximum distance traveled among the swarm members.
