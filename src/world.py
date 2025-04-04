@@ -10,5 +10,5 @@ class WORLD:
     Loads a world and a plane for the simulation
     """
     def __init__(self):
-        p.loadSDF("data/world.sdf")
+        p.loadSDF("./src/data/world.sdf")
         self.plane_id = p.loadURDF("plane.urdf")

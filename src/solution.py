@@ -23,22 +23,22 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system(f"python scripts/simulate.py {directOrGUI} {self.myID} &>/dev/null &")
+        os.system(f"python ./src/simulate.py {directOrGUI} {self.myID} &>/dev/null &")
 
     def Wait_For_Simulation_To_End(self):
-        while not os.path.exists(f'data/fitness{self.myID}.txt'):
+        while not os.path.exists(f'./src/data/fitness{self.myID}.txt'):
             time.sleep(0.01)
-        with open(f'data/fitness{self.myID}.txt', 'r') as f:
+        with open(f'./src/data/fitness{self.myID}.txt', 'r') as f:
             self.fitness = f.read()
             self.fitness = float(self.fitness)
             f.close()
-        os.system(f'rm data/fitness{self.myID}.txt')
+        os.system(f'rm ./src/data/fitness{self.myID}.txt')
 
 
     def Create_World(self):
-        if not os.path.exists("data"):
-            os.makedirs("data")
-        pyrosim.Start_SDF("data/world.sdf")
+        if not os.path.exists("./src/data"):
+            os.makedirs("./src/data")
+        pyrosim.Start_SDF("./src/data/world.sdf")
         pyrosim.Send_Cube(name="Box", pos=[-4, 4, 0.5], size=[1, 1, 1])
         pyrosim.End()
 
@@ -48,7 +48,7 @@ class SOLUTION:
         """
         Creates a 3-link robot with two revolute joints.
         """
-        pyrosim.Start_URDF("data/body.urdf")
+        pyrosim.Start_URDF("./src/data/body.urdf")
         
         # Torso centered at (0,0,1)
         pyrosim.Send_Cube(
@@ -182,7 +182,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork(f"data/brain{self.myID}.nndf")
+        pyrosim.Start_NeuralNetwork(f"./src/data/brain{self.myID}.nndf")
         # Sensor neurons
         # pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
         # pyrosim.Send_Sensor_Neuron(name=1, linkName="BackLeg")

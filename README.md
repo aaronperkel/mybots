@@ -25,24 +25,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Install the Package
-
+### 4. Running the Simulation
 ```bash
-python setup.py install
-```
-
-### 5. Running the Simulation
-```bash
-python scripts/search.py
-```
-
-## Helpful Scripts
-### 1. Generate URDF/SDF Files
-```bash
-python scripts/generate.py
-```
-
-### 2. Running the Simulation
-```bash
-python scripts/simulate.py
+python src/search.py
 ```

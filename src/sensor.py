@@ -23,4 +23,4 @@ class SENSOR:
         self.values[t] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.link_name)
 
     def Save_Values(self):
-        np.save(f'data/{self.link_name}_sensor_values.npy', self.values)
+        np.save(f'./src/data/{self.link_name}_sensor_values.npy', self.values)

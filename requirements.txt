@@ -3,7 +3,6 @@ cycler==0.12.1
 fonttools==4.56.0
 kiwisolver==1.4.8
 matplotlib==3.10.0
--e git+https://github.com/aaronperkel/mybots.git@e84e2376ae5e6dea5cc6e135f215d05e172e0776#egg=mybots
 numpy==2.2.2
 packaging==24.2
 pillow==11.1.0
