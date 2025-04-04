@@ -13,14 +13,14 @@ import os
 import constants as c
 
 class ROBOT:
-    def __init__(self, solutionID):
+    def __init__(self, solutionID, urdf_file):
         self.solutionID = solutionID
-        self.robot_id = p.loadURDF("./src/data/body.urdf")
+        self.robot_id = p.loadURDF(urdf_file)
         pyrosim.Prepare_To_Simulate(self.robot_id)
-        self.nn = NEURAL_NETWORK(f"./src/data/brain{solutionID}.nndf")
+        # self.nn = NEURAL_NETWORK(f"./src/data/brain{solutionID}.nndf")
+        self.nn = NEURAL_NETWORK(f"./src/data/brain0.nndf")
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
-        os.system(f'rm ./src/data/brain{self.solutionID}.nndf')
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -52,5 +52,4 @@ class ROBOT:
         xPosition = basePosition[0]
         with open(f'./src/data/tmp{self.solutionID}.txt', 'w') as f:
             f.write(str(xPosition))
-            f.close()
-        os.system(f'mv ./src/data/tmp{self.solutionID}.txt ./src/data/fitness{self.solutionID}.txt')
+        os.rename(f'./src/data/tmp{self.solutionID}.txt', f'./src/data/fitness{self.solutionID}.txt')

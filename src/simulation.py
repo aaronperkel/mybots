@@ -8,6 +8,8 @@ import constants as c
 import pybullet as p
 import pybullet_data
 import time
+import os
+from glob import glob
 
 from world import WORLD
 from robot import ROBOT
@@ -26,7 +28,11 @@ class SIMULATION:
         p.setGravity(c.GRAV_X, c.GRAV_Y, c.GRAV_Z)
 
         self.world = WORLD()
-        self.robot = ROBOT(solutionID)
+        
+        self.robots = []
+        urdf_files = sorted(glob("./src/data/body_*.urdf"))
+        for i, urdf_file in enumerate(urdf_files):
+            self.robots.append(ROBOT(i, urdf_file))
 
     def __del__(self):
         p.disconnect()
@@ -34,11 +40,20 @@ class SIMULATION:
     def Run(self):
         for i in range(c.STEPS):
             p.stepSimulation()
-            self.robot.Sense(i)
-            self.robot.Think()
-            self.robot.Act(i)
+            for robot in self.robots:
+                robot.Sense(i)
+                robot.Think()
+                robot.Act(i)
             if self.directOrGUI == 'GUI':
                 time.sleep(c.SLEEP_TIME)
 
     def Get_Fitness(self):
-        self.robot.Get_Fitness()
+        fitnesses = []
+        for robot in self.robots:
+            robot.Get_Fitness()
+            with open(f'./src/data/fitness{robot.solutionID}.txt', 'r') as f:
+                fitnesses.append(float(f.read()))
+        for robot in self.robots:
+            os.remove(f'./src/data/fitness{robot.solutionID}.txt')
+        for file in glob("./src/data/body_*.urdf"):
+            os.remove(file)
