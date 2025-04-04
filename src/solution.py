@@ -23,10 +23,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        if directOrGUI == "GUI":
-            os.system(f"python ./src/simulate.py {directOrGUI} {self.myID}")
-        else:
-            os.system(f"python ./src/simulate.py {directOrGUI} {self.myID}")# &>/dev/null &")
+        os.system(f"python ./src/simulate.py {directOrGUI} {self.myID} &>/dev/null &")
 
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists(f'./src/data/fitness{self.myID}.txt'):

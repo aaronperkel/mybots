@@ -32,8 +32,8 @@ class SIMULATION:
         
         self.robots = []
         urdf_files = sorted(glob("./src/data/body_*.urdf"))
-        for i, urdf_file in enumerate(urdf_files):
-            self.robots.append(ROBOT(i, urdf_file))
+        for urdf_file in urdf_files:
+            self.robots.append(ROBOT(self.solutionID, urdf_file))
 
     def __del__(self):
         p.disconnect()
@@ -49,30 +49,24 @@ class SIMULATION:
                 time.sleep(c.SLEEP_TIME)
 
     def Get_Fitness(self):
-        fitnesses = []
-        for robot in self.robots:
-            # Each robot writes e.g. fitness0.txt, fitness1.txt, ...
-            robot.Get_Fitness()
-            with open(f'./src/data/fitness{robot.solutionID}.txt', 'r') as f:
-                val = float(f.read())
-                fitnesses.append(val)
-        
-        # For the “strength in numbers” objective, we take the max distance:
-        best = max(fitnesses)
+        # 1) Pick a single robot to write the fitness file
+        #    In a swarm with a shared ID, it doesn't matter which one.
+        chosen_robot = self.robots[-1]
+        chosen_robot.Get_Fitness()
 
-        # Now write this max distance to the file your solution code is *actually* waiting for:
-        solutionID_from_command_line = int(self.solutionID)  # e.g. sys.argv[2]
-        with open(f'./src/data/tmp{solutionID_from_command_line}.txt', 'w') as f:
+        # 2) Now read that single fitness file
+        #    (All swarm members share self.solutionID, so it’s 'fitness{solutionID}.txt')
+        with open(f'./src/data/fitness{self.solutionID}.txt', 'r') as f:
+            best = float(f.read())
+
+        # 3) Write it back under the same name (or rename if needed)
+        with open(f'./src/data/tmp{self.solutionID}.txt', 'w') as f:
             f.write(str(best))
         os.rename(
-            f'./src/data/tmp{solutionID_from_command_line}.txt',
-            f'./src/data/fitness{solutionID_from_command_line}.txt'
+            f'./src/data/tmp{self.solutionID}.txt',
+            f'./src/data/fitness{self.solutionID}.txt'
         )
 
-        # Clean up each robot’s individual fitness file:
-        for robot in self.robots:
-            os.remove(f'./src/data/fitness{robot.solutionID}.txt')
-        
-        # Clean up the URDF files:
+        # 4) Remove extra URDF files, if you want to keep the directory clean
         for file in glob("./src/data/body_*.urdf"):
             os.remove(file)
