@@ -52,4 +52,5 @@ class ROBOT:
         xPosition = basePosition[0]
         with open(f'./src/data/tmp{self.solutionID}.txt', 'w') as f:
             f.write(str(xPosition))
-        os.rename(f'./src/data/tmp{self.solutionID}.txt', f'./src/data/fitness{self.solutionID}.txt')
+        os.rename(f'./src/data/tmp{self.solutionID}.txt',
+                f'./src/data/fitness{self.solutionID}.txt')

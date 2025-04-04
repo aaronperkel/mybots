@@ -17,6 +17,7 @@ from robot import ROBOT
 class SIMULATION:
     def __init__(self, directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
+        self.solutionID = solutionID
 
         if self.directOrGUI == 'GUI':
             self.physics_client = p.connect(p.GUI)
@@ -50,10 +51,28 @@ class SIMULATION:
     def Get_Fitness(self):
         fitnesses = []
         for robot in self.robots:
+            # Each robot writes e.g. fitness0.txt, fitness1.txt, ...
             robot.Get_Fitness()
             with open(f'./src/data/fitness{robot.solutionID}.txt', 'r') as f:
-                fitnesses.append(float(f.read()))
+                val = float(f.read())
+                fitnesses.append(val)
+        
+        # For the “strength in numbers” objective, we take the max distance:
+        best = max(fitnesses)
+
+        # Now write this max distance to the file your solution code is *actually* waiting for:
+        solutionID_from_command_line = int(self.solutionID)  # e.g. sys.argv[2]
+        with open(f'./src/data/tmp{solutionID_from_command_line}.txt', 'w') as f:
+            f.write(str(best))
+        os.rename(
+            f'./src/data/tmp{solutionID_from_command_line}.txt',
+            f'./src/data/fitness{solutionID_from_command_line}.txt'
+        )
+
+        # Clean up each robot’s individual fitness file:
         for robot in self.robots:
             os.remove(f'./src/data/fitness{robot.solutionID}.txt')
+        
+        # Clean up the URDF files:
         for file in glob("./src/data/body_*.urdf"):
             os.remove(file)
