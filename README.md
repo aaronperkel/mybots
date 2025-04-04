@@ -33,16 +33,16 @@ python setup.py install
 
 ### 5. Running the Simulation
 ```bash
-python scripts/search.py
+python src/search.py
 ```
 
 ## Helpful Scripts
 ### 1. Generate URDF/SDF Files
 ```bash
-python scripts/generate.py
+python src/generate.py
 ```
 
 ### 2. Running the Simulation
 ```bash
-python scripts/simulate.py
+python src/simulate.py
 ```
