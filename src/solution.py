@@ -44,10 +44,9 @@ class SOLUTION:
 
 
     def Create_Body(self):
-        swarm_size = 3  # number of robots in the swarm
-        for i in range(swarm_size):
+        for i in range(c.SWARM_SIZE):
             # Define an offset for this robot; here we offset only in x.
-            offset = [i * 3.0, 0.0, 0.0]
+            offset = [i * 4.0, 0.0, 0.0]
             # Generate a unique filename for each URDF
             urdf_filename = f"./src/data/body_{i}.urdf"
             pyrosim.Start_URDF(urdf_filename)
@@ -61,7 +60,7 @@ class SOLUTION:
             )
             
             # Back Leg
-            backleg_joint_pos = [0.0 + offset[0], -0.5 + offset[1], 1.0 + offset[2]]
+            backleg_joint_pos = [0.0 + offset[0], -0.5, 1.0]
             pyrosim.Send_Joint(
                 name="Torso_BackLeg",
                 parent="Torso",
@@ -70,7 +69,7 @@ class SOLUTION:
                 position=backleg_joint_pos,
                 jointAxis='1 0 0'
             )
-            backleg_pos = [0.0 + offset[0], -0.5 + offset[1], 0.0 + offset[2]]
+            backleg_pos = [0.0, -0.5, 0.0]
             pyrosim.Send_Cube(
                 name="BackLeg",
                 pos=backleg_pos,
@@ -78,7 +77,7 @@ class SOLUTION:
             )
             
             # Front Leg
-            frontleg_joint_pos = [0.0 + offset[0], 0.5 + offset[1], 1.0 + offset[2]]
+            frontleg_joint_pos = [0.0 + offset[0], 0.5, 1.0]
             pyrosim.Send_Joint(
                 name="Torso_FrontLeg",
                 parent="Torso",
@@ -87,7 +86,7 @@ class SOLUTION:
                 position=frontleg_joint_pos,
                 jointAxis='1 0 0'
             )
-            frontleg_pos = [0.0 + offset[0], 0.5 + offset[1], 0.0 + offset[2]]
+            frontleg_pos = [0.0, 0.5, 0.0]
             pyrosim.Send_Cube(
                 name="FrontLeg",
                 pos=frontleg_pos,
@@ -95,7 +94,7 @@ class SOLUTION:
             )
             
             # Left Leg
-            leftleg_joint_pos = [-0.5 + offset[0], 0.0 + offset[1], 1.0 + offset[2]]
+            leftleg_joint_pos = [-0.5 + offset[0], 0.0, 1.0]
             pyrosim.Send_Joint(
                 name="Torso_LeftLeg",
                 parent="Torso",
@@ -104,7 +103,7 @@ class SOLUTION:
                 position=leftleg_joint_pos,
                 jointAxis='0 1 0'
             )
-            leftleg_pos = [-0.5 + offset[0], 0.0 + offset[1], 0.0 + offset[2]]
+            leftleg_pos = [-0.5, 0.0, 0.0]
             pyrosim.Send_Cube(
                 name="LeftLeg",
                 pos=leftleg_pos,
@@ -112,7 +111,7 @@ class SOLUTION:
             )
             
             # Right Leg
-            rightleg_joint_pos = [0.5 + offset[0], 0.0 + offset[1], 1.0 + offset[2]]
+            rightleg_joint_pos = [0.5 + offset[0], 0.0, 1.0]
             pyrosim.Send_Joint(
                 name="Torso_RightLeg",
                 parent="Torso",
@@ -121,7 +120,7 @@ class SOLUTION:
                 position=rightleg_joint_pos,
                 jointAxis='0 1 0'
             )
-            rightleg_pos = [0.5 + offset[0], 0.0 + offset[1], 0.0 + offset[2]]
+            rightleg_pos = [0.5, 0.0, 0.0]
             pyrosim.Send_Cube(
                 name="RightLeg",
                 pos=rightleg_pos,
@@ -129,7 +128,7 @@ class SOLUTION:
             )
             
             # Front Lower Leg (attached to FrontLeg)
-            frontlowerleg_joint_pos = [0.0 + offset[0], 1.0 + offset[1], 0.0 + offset[2]]
+            frontlowerleg_joint_pos = [0.0, 1.0, 0.0]
             pyrosim.Send_Joint(
                 name="FrontLeg_FrontLowerLeg",
                 parent="FrontLeg",
@@ -138,7 +137,7 @@ class SOLUTION:
                 position=frontlowerleg_joint_pos,
                 jointAxis='1 0 0'
             )
-            frontlowerleg_pos = [0.0 + offset[0], 0.0 + offset[1], -0.5 + offset[2]]
+            frontlowerleg_pos = [0.0, 0.0, -0.5]
             pyrosim.Send_Cube(
                 name="FrontLowerLeg",
                 pos=frontlowerleg_pos,
@@ -146,7 +145,7 @@ class SOLUTION:
             )
             
             # Back Lower Leg (attached to BackLeg)
-            backlowerleg_joint_pos = [0.0 + offset[0], -1.0 + offset[1], 0.0 + offset[2]]
+            backlowerleg_joint_pos = [0.0, -1.0, 0.0]
             pyrosim.Send_Joint(
                 name="BackLeg_BackLowerLeg",
                 parent="BackLeg",
@@ -155,7 +154,7 @@ class SOLUTION:
                 position=backlowerleg_joint_pos,
                 jointAxis='1 0 0'
             )
-            backlowerleg_pos = [0.0 + offset[0], 0.0 + offset[1], -0.5 + offset[2]]
+            backlowerleg_pos = [0.0, 0.0, -0.5]
             pyrosim.Send_Cube(
                 name="BackLowerLeg",
                 pos=backlowerleg_pos,
@@ -163,7 +162,7 @@ class SOLUTION:
             )
             
             # Left Lower Leg (attached to LeftLeg)
-            leftlowerleg_joint_pos = [-1.0 + offset[0], 0.0 + offset[1], 0.0 + offset[2]]
+            leftlowerleg_joint_pos = [-1.0, 0.0, 0.0]
             pyrosim.Send_Joint(
                 name="LeftLeg_LeftLowerLeg",
                 parent="LeftLeg",
@@ -172,7 +171,7 @@ class SOLUTION:
                 position=leftlowerleg_joint_pos,
                 jointAxis='0 1 0'
             )
-            leftlowerleg_pos = [0.0 + offset[0], 0.0 + offset[1], -0.5 + offset[2]]
+            leftlowerleg_pos = [0.0, 0.0, -0.5]
             pyrosim.Send_Cube(
                 name="LeftLowerLeg",
                 pos=leftlowerleg_pos,
@@ -180,7 +179,7 @@ class SOLUTION:
             )
             
             # Right Lower Leg (attached to RightLeg)
-            rightlowerleg_joint_pos = [1.0 + offset[0], 0.0 + offset[1], 0.0 + offset[2]]
+            rightlowerleg_joint_pos = [1.0, 0.0, 0.0]
             pyrosim.Send_Joint(
                 name="RightLeg_RightLowerLeg",
                 parent="RightLeg",
@@ -189,7 +188,7 @@ class SOLUTION:
                 position=rightlowerleg_joint_pos,
                 jointAxis='0 1 0'
             )
-            rightlowerleg_pos = [0.0 + offset[0], 0.0 + offset[1], -0.5 + offset[2]]
+            rightlowerleg_pos = [0.0, 0.0, -0.5]
             pyrosim.Send_Cube(
                 name="RightLowerLeg",
                 pos=rightlowerleg_pos,
