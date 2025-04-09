@@ -41,12 +41,12 @@ class SOLUTION:
         pyrosim.Start_SDF("./src/data/world.sdf")
         
         # Structured obstacles: arrange obstacles in a grid pattern.
-        grid_rows = 3        # Number of rows in the grid
+        grid_rows = 5        # Number of rows in the grid
         grid_cols = 5        # Number of columns in the grid
         spacing_x = 2.0      # Horizontal spacing between obstacles
         spacing_y = 2.0      # Vertical spacing between obstacles
         base_x = 0.0         # Starting x coordinate for the grid
-        base_y = 1.0         # Starting y coordinate for the grid
+        base_y = 0.5         # Starting y coordinate for the grid
         base_z = 0.5         # Height position for obstacles (assumes center in z)
         
         # Common size for all obstacles; adjust if you want variations.
