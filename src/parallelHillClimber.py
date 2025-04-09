@@ -16,10 +16,9 @@ class PARALLEL_HILL_CLIMBER:
         os.system('rm -f ./src/data/fitness*.txt')
         self.nextAvailableID = 0
         self.parents = {}
-
-        progress = int((1) / c.NUMBER_OF_GENERATIONS * 50)
-        bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
-        print(f'\rGeneration {1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
+        
+        self.total_evaluations = c.POPULATION_SIZE + c.NUMBER_OF_GENERATIONS * c.POPULATION_SIZE
+        self.evals_completed = 0
         
         for i in range(c.POPULATION_SIZE):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -28,17 +27,15 @@ class PARALLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
         for sol in solutions.values():
             sol.Evaluate('DIRECT')
+            self.evals_completed += 1
+            progress = int((self.evals_completed / self.total_evaluations) * 50)
+            bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
+            print(f'\rEvaluation {self.evals_completed}/{self.total_evaluations} {bar}', end='', flush=True)
 
     def Evolve(self):
         self.Evaluate(self.parents)
-        for i in range(c.NUMBER_OF_GENERATIONS):
+        for _ in range(c.NUMBER_OF_GENERATIONS):
             self.Evolve_For_One_Generation()
-            # Create a simple progress bar (50 characters wide)
-            progress = int((i + 1) / c.NUMBER_OF_GENERATIONS * 50)
-            bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
-            print(f'\rGeneration {i+1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
-            # self.Print()
-        print()  # Move to the next line after completion
 
     def Evolve_For_One_Generation(self):
         self.children = {}

@@ -12,7 +12,8 @@ def main():
     phc.Show_Best()
 
 if __name__ == '__main__':
-    progress = int(1 / c.NUMBER_OF_GENERATIONS * 50)
+    total_evaluations = c.POPULATION_SIZE + c.NUMBER_OF_GENERATIONS * c.POPULATION_SIZE
+    progress = int((0 / total_evaluations) * 50)
     bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
-    print(f'\rGeneration {1}/{c.NUMBER_OF_GENERATIONS} {bar}', end='', flush=True)
+    print(f'\rEvaluation {0}/{total_evaluations} {bar}', end='', flush=True)
     main()

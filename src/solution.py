@@ -39,7 +39,27 @@ class SOLUTION:
         if not os.path.exists("./src/data"):
             os.makedirs("./src/data")
         pyrosim.Start_SDF("./src/data/world.sdf")
-        pyrosim.Send_Cube(name="Box", pos=[-4, 4, 0.5], size=[1, 1, 1])
+        
+        # Structured obstacles: arrange obstacles in a grid pattern.
+        grid_rows = 3        # Number of rows in the grid
+        grid_cols = 5        # Number of columns in the grid
+        spacing_x = 2.0      # Horizontal spacing between obstacles
+        spacing_y = 2.0      # Vertical spacing between obstacles
+        base_x = 0.0         # Starting x coordinate for the grid
+        base_y = 1.0         # Starting y coordinate for the grid
+        base_z = 0.5         # Height position for obstacles (assumes center in z)
+        
+        # Common size for all obstacles; adjust if you want variations.
+        obstacle_size = [1.0, 1.0, 1.0]
+        
+        # Generate obstacles in a structured grid
+        for row in range(grid_rows):
+            for col in range(grid_cols):
+                name = f"Obstacle_r{row}_c{col}"
+                # Compute position based on row and column with fixed spacing.
+                pos = [base_x + col * spacing_x, base_y + row * spacing_y, base_z]
+                pyrosim.Send_Cube(name=name, pos=pos, size=obstacle_size)
+        
         pyrosim.End()
 
 
