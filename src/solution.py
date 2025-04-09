@@ -41,16 +41,16 @@ class SOLUTION:
         pyrosim.Start_SDF("./src/data/world.sdf")
         
         # Structured obstacles: arrange obstacles in a grid pattern.
-        grid_rows = 5        # Number of rows in the grid
-        grid_cols = 5        # Number of columns in the grid
-        spacing_x = 2.0      # Horizontal spacing between obstacles
-        spacing_y = 2.0      # Vertical spacing between obstacles
-        base_x = 0.0         # Starting x coordinate for the grid
-        base_y = 0.5         # Starting y coordinate for the grid
-        base_z = 0.5         # Height position for obstacles (assumes center in z)
+        grid_rows = c.SWARM_SIZE        # Number of rows in the grid
+        grid_cols = 5                   # Number of columns in the grid
+        spacing_x = -2.0                # Horizontal spacing between obstacles
+        spacing_y = 4.0                 # Vertical spacing between obstacles
+        base_x = -4.0                   # Starting x coordinate for the grid
+        base_y = 0.0                    # Starting y coordinate for the grid
+        base_z = 0.3                    # Height position for obstacles (assumes center in z)
         
         # Common size for all obstacles; adjust if you want variations.
-        obstacle_size = [1.0, 1.0, 1.0]
+        obstacle_size = [0.6, 0.6, 0.6]
         
         # Generate obstacles in a structured grid
         for row in range(grid_rows):
@@ -66,7 +66,7 @@ class SOLUTION:
     def Create_Body(self):
         for i in range(c.SWARM_SIZE):
             # Define an offset for this robot; here we offset only in x.
-            offset = [i * 4.0, 0.0, 0.0]
+            offset = [i * 0.0, i * 4.0, 0.0]
             # Generate a unique filename for each URDF
             urdf_filename = f"./src/data/body_{i}.urdf"
             pyrosim.Start_URDF(urdf_filename)
@@ -80,7 +80,7 @@ class SOLUTION:
             )
             
             # Back Leg
-            backleg_joint_pos = [0.0 + offset[0], -0.5, 1.0]
+            backleg_joint_pos = [0.0 + offset[0], -0.5 + offset[1], 1.0]
             pyrosim.Send_Joint(
                 name="Torso_BackLeg",
                 parent="Torso",
@@ -97,7 +97,7 @@ class SOLUTION:
             )
             
             # Front Leg
-            frontleg_joint_pos = [0.0 + offset[0], 0.5, 1.0]
+            frontleg_joint_pos = [0.0 + offset[0], 0.5 + offset[1], 1.0]
             pyrosim.Send_Joint(
                 name="Torso_FrontLeg",
                 parent="Torso",
@@ -114,7 +114,7 @@ class SOLUTION:
             )
             
             # Left Leg
-            leftleg_joint_pos = [-0.5 + offset[0], 0.0, 1.0]
+            leftleg_joint_pos = [-0.5 + offset[0], 0.0 + offset[1], 1.0]
             pyrosim.Send_Joint(
                 name="Torso_LeftLeg",
                 parent="Torso",
@@ -131,7 +131,7 @@ class SOLUTION:
             )
             
             # Right Leg
-            rightleg_joint_pos = [0.5 + offset[0], 0.0, 1.0]
+            rightleg_joint_pos = [0.5 + offset[0], 0.0 + offset[1], 1.0]
             pyrosim.Send_Joint(
                 name="Torso_RightLeg",
                 parent="Torso",
