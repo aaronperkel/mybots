@@ -15,9 +15,9 @@ A robotics simulation project using PyBullet and neural network control. This re
 ### Milestone 2:
 - Modify simulate.py to load multiple URDF files and run the simulation for the swarm. I will provide a video proof of the swarm simulation.
 ### Milestone 3:
-- Introduce obstacles (blocks) in front of the swarm (as inspired by the Full Steam Ahead project) to cause some collisions. I’ll provide a video demonstrating this behavior.
+- Introduce obstacles (blocks) in front of the swarm (as inspired by the Full Steam Ahead project) to cause collisions. Revised: Enhance the obstacle environment by adding multiple obstacles with varied positions, sizes, or even movement dynamics. This will create a more challenging course that forces different collision scenarios for the robots. A video will demonstrate these varied obstacle interactions.
 ### Milestone 4:
-- Update the fitness function in robot.py to evaluate and reward the maximum distance traveled among the swarm members. Preliminary results and data comparisons will be included in my final submission.
+- Update the fitness function in robot.py to evaluate and reward the maximum distance traveled among the swarm members. Revised: Implement an A/B testing framework by modifying the fitness function to compare two evaluation approaches: one that rewards the best-performing individual (maximum distance traveled) and another that uses the average distance traveled by the entire swarm. Preliminary results and data comparisons from these two methods will be included in my final submission.
 
 ## Setup Instructions
 
