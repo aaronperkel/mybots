@@ -10,6 +10,7 @@ import constants as c
 import copy
 import os
 import pickle
+import time
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
@@ -25,13 +26,36 @@ class PARALLEL_HILL_CLIMBER:
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
+
     def Evaluate(self, solutions):
+        # Record the start time at the first evaluation.
+        if self.evals_completed == 0:
+            self.start_time = time.time()
+
         for sol in solutions.values():
             sol.Evaluate('DIRECT')
             self.evals_completed += 1
+
+            # Calculate elapsed time and estimate remaining time.
+            elapsed_time = time.time() - self.start_time
+            avg_time = elapsed_time / self.evals_completed
+            remaining_evals = self.total_evaluations - self.evals_completed
+            estimated_remaining = remaining_evals * avg_time
+
+            # Convert estimated time into minutes and seconds.
+            minutes = int(estimated_remaining) // 60
+            seconds = int(estimated_remaining) % 60
+
+            # Build progress bar.
             progress = int((self.evals_completed / self.total_evaluations) * 50)
             bar = '[' + '#' * progress + '-' * (50 - progress) + ']'
-            print(f'\rEvaluation {self.evals_completed}/{self.total_evaluations} {bar}', end='', flush=True)
+
+            # Print loading bar on one line and estimated time on the next.
+            print(f'\rEvaluation {self.evals_completed}/{self.total_evaluations} {bar}')
+            print(f'Estimated Time Remaining: {minutes:02d}:{seconds:02d}')
+            
+            # Move the cursor up 2 lines so the next update overwrites them.
+            print("\033[2A", end='', flush=True)
 
     def Evolve(self):
         self.Evaluate(self.parents)
