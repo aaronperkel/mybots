@@ -47,9 +47,14 @@ class ROBOT:
 
     def Get_Fitness(self):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot_id)
-        basePosition = basePositionAndOrientation[0]
-        xPosition = basePosition[0]
+        x, y, _ = basePositionAndOrientation[0]
+        
+        reward_weight = 2.0
+        penalty_weight = 3.0
+
+        fitness = (-x * reward_weight) - ((abs(y) * penalty_weight) ** 2)
+
         with open(f'./src/data/tmp{self.solutionID}.txt', 'w') as f:
-            f.write(str(xPosition))
+            f.write(str(fitness))
         os.rename(f'./src/data/tmp{self.solutionID}.txt',
                 f'./src/data/fitness{self.solutionID}.txt')
