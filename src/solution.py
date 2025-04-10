@@ -43,14 +43,14 @@ class SOLUTION:
         # Structured obstacles: arrange obstacles in a grid pattern.
         grid_rows = c.SWARM_SIZE        # Number of rows in the grid
         grid_cols = 5                   # Number of columns in the grid
-        spacing_x = -2.0                # Horizontal spacing between obstacles
+        spacing_x = -4.0                # Horizontal spacing between obstacles
         spacing_y = 4.0                 # Vertical spacing between obstacles
-        base_x = -4.0                   # Starting x coordinate for the grid
+        base_x = -2.0                   # Starting x coordinate for the grid
         base_y = 0.0                    # Starting y coordinate for the grid
-        base_z = 0.3                    # Height position for obstacles (assumes center in z)
+        base_z = 0.5                    # Height position for obstacles (assumes center in z)
         
         # Common size for all obstacles; adjust if you want variations.
-        obstacle_size = [0.6, 0.6, 0.6]
+        obstacle_size = [1.0, 1.0, 0.7]
         
         # Generate obstacles in a structured grid
         for row in range(grid_rows):
