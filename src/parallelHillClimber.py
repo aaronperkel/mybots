@@ -9,6 +9,7 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import pickle
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
@@ -74,5 +75,7 @@ class PARALLEL_HILL_CLIMBER:
     def Show_Best(self):
         # Find the parent with the lowest fitness
         best = min(self.parents.values(), key=lambda sol: sol.fitness)
+        with open('./src/data/best_solution.pkl', 'wb') as f:
+            pickle.dump(best, f)
         # Re-simulate that solution with graphics on.
         best.Start_Simulation("GUI")
