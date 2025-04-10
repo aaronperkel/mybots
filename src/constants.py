@@ -4,14 +4,14 @@ Holds global constants such as the number of simulation steps, motor frequencies
 and other physical constants (gravity, max force, etc.).
 """
 
-STEPS = 1000
+STEPS = 5000
 SLEEP_TIME = 1/600
 
 MAX_FORCE = 30
 
-NUMBER_OF_GENERATIONS = 5
-POPULATION_SIZE = 5
-SWARM_SIZE = 5
+NUMBER_OF_GENERATIONS = 2
+POPULATION_SIZE = 2
+SWARM_SIZE = 2
 
 NUM_SENSOR_NEURONS = 4
 NUM_MOTOR_NEURONS = 8
