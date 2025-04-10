@@ -34,23 +34,22 @@ class SOLUTION:
             f.close()
         os.system(f'rm ./src/data/fitness{self.myID}.txt')
 
-
     def Create_World(self):
         if not os.path.exists("./src/data"):
             os.makedirs("./src/data")
         pyrosim.Start_SDF("./src/data/world.sdf")
         
         # Structured obstacles: arrange obstacles in a grid pattern.
-        grid_rows = c.SWARM_SIZE        # Number of rows in the grid
+        grid_rows = c.SWARM_SIZE * 5    # Number of rows in the grid
         grid_cols = 5                   # Number of columns in the grid
         spacing_x = -4.0                # Horizontal spacing between obstacles
-        spacing_y = 4.0                 # Vertical spacing between obstacles
-        base_x = -3.0                   # Starting x coordinate for the grid
-        base_y = 0.0                    # Starting y coordinate for the grid
+        spacing_y = 3.0                 # Vertical spacing between obstacles
+        base_x = -2.0                   # Starting x coordinate for the grid
+        base_y = -5.0                   # Starting y coordinate for the grid
         base_z = 0.5                    # Height position for obstacles (assumes center in z)
         
         # Common size for all obstacles; adjust if you want variations.
-        obstacle_size = [1.0, 1.0, 0.7]
+        obstacle_size = [1.0, 1.0, 0.5]
         
         # Generate obstacles in a structured grid
         for row in range(grid_rows):
@@ -61,7 +60,6 @@ class SOLUTION:
                 pyrosim.Send_Cube(name=name, pos=pos, size=obstacle_size, mass=0)
         
         pyrosim.End()
-
 
     def Create_Body(self):
         for i in range(c.SWARM_SIZE):
@@ -216,7 +214,6 @@ class SOLUTION:
             )
             
             pyrosim.End()
-
 
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork(f"./src/data/brain{self.myID}.nndf")
