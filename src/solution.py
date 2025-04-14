@@ -49,14 +49,14 @@ class SOLUTION:
         base_z = 0.5                    # Height position for obstacles (assumes center in z)
         
         # Common size for all obstacles; adjust if you want variations.
-        obstacle_size = [1.0, 1.0, 0.5]
+        obstacle_size = [1.0, 1.0, 0.4]
         
         # Generate obstacles in a structured grid
         for row in range(grid_rows):
             for col in range(grid_cols):
                 name = f"Obstacle_r{row}_c{col}"
                 # Compute position based on row and column with fixed spacing.
-                pos = [base_x + col * spacing_x, base_y + row * spacing_y, base_z]
+                pos = [base_x + col * spacing_x, base_y + row * spacing_y, base_z - (base_z / 2)]
                 pyrosim.Send_Cube(name=name, pos=pos, size=obstacle_size, mass=0)
         
         pyrosim.End()
