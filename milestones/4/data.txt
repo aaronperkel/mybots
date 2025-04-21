@@ -1,0 +1,2 @@
+max mean = 0.888, avg mean = 0.424
+t‑test p‑value = 0.1712
