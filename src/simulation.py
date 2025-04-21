@@ -18,6 +18,9 @@ class SIMULATION:
     def __init__(self, directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
         self.solutionID = solutionID
+        
+        # choose fitness method: 'max' or 'avg'
+        self.evalMethod = os.environ.get('FITNESS_METHOD', 'max')
 
         if self.directOrGUI == 'GUI':
             self.physics_client = p.connect(p.GUI)
@@ -49,24 +52,30 @@ class SIMULATION:
                 time.sleep(c.SLEEP_TIME)
 
     def Get_Fitness(self):
-        # 1) Pick a single robot to write the fitness file
-        #    In a swarm with a shared ID, it doesn't matter which one.
-        chosen_robot = self.robots[-1]
-        chosen_robot.Get_Fitness()
+        # gather x‐distances for all swarm members
+        distances = []
+        for robot in self.robots:
+            pos, _ = p.getBasePositionAndOrientation(robot.robot_id)
+            distances.append(pos[0])
 
-        # 2) Now read that single fitness file
-        #    (All swarm members share self.solutionID, so it’s 'fitness{solutionID}.txt')
-        with open(f'./src/data/fitness{self.solutionID}.txt', 'r') as f:
-            best = float(f.read())
+        max_dist = max(distances)
+        avg_dist = sum(distances) / len(distances)
 
-        # 3) Write it back under the same name (or rename if needed)
-        with open(f'./src/data/tmp{self.solutionID}.txt', 'w') as f:
-            f.write(str(best))
-        os.rename(
-            f'./src/data/tmp{self.solutionID}.txt',
-            f'./src/data/fitness{self.solutionID}.txt'
-        )
+        # save both for your A/B charts
+        with open(f'./src/data/fitness_max{self.solutionID}.txt', 'w') as f:
+            f.write(str(max_dist))
+        with open(f'./src/data/fitness_avg{self.solutionID}.txt', 'w') as f:
+            f.write(str(avg_dist))
 
-        # 4) Remove extra URDF files, if you want to keep the directory clean
-        for file in glob("./src/data/body_*.urdf"):
-            os.remove(file)
+        # pick which one drives the GA
+        chosen = avg_dist if self.evalMethod == 'avg' else max_dist
+
+        # write the “official” fitness file
+        tmp = f'./src/data/tmp{self.solutionID}.txt'
+        with open(tmp, 'w') as f:
+            f.write(str(chosen))
+        os.rename(tmp, f'./src/data/fitness{self.solutionID}.txt')
+
+        # cleanup
+        for fpath in glob("./src/data/body_*.urdf"):
+            os.remove(fpath)
