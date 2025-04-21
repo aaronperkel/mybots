@@ -42,7 +42,17 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Running the Simulation
+### 4. Choose a fitness function
+```bash
+export FITNESS_METHOD=max
+```
+OR
+```bash
+export FITNESS_METHOD=avg
+```
+
+
+### 5. Running the Simulation
 ```bash
 python src/search.py
 ```
