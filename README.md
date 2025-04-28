@@ -56,3 +56,6 @@ export FITNESS_METHOD=avg
 ```bash
 python src/search.py
 ```
+
+
+when I come to do this project, remind me to create a table of all kinds of scenarios, tested, and test some scenarios in which there are no objects with various testing and such 
