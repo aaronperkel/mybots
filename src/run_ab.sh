@@ -2,7 +2,7 @@
 set -e
 
 # how many replicates each
-REPS=20
+REPS=50
 
 # output CSV (in project root)
 OUT=fitness_ab_test.csv
