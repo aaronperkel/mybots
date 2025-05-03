@@ -1,19 +1,13 @@
-at 50 reps, 2500 steps, 75NOG, 2POPSIZE, 2 swarm size
-max mean = 1.269, avg mean = 0.495
-t‑test p‑value = 0.0130
-
-at 50 reps, 5000 steps, 75NOG, 4POPSIZE, 2 swarm size\
-max mean = 1.549, avg mean = 0.940
-t‑test p‑value = 0.1975
-
 # Results
 
 | Obstacles? | Reps | Steps | Generations | Pop Size | Swarm Size | Max Mean | Avg Mean | p-value | Significant? | File Name |
-| ---------- | ---- | ----- | ----------- | -------- | ---------- | -------- | -------- | ------- | ------------ | ---- ---- |
-| Yes        | 50   | 2500  | 75          | 2        | 2          | 1.269    | 0.495    | 0.0130  | Yes          | a.csv     |
-| Yes        | 50   | 5000  | 75          | 4        | 2          | 1.549    | 0.940    | 0.1975  | No           | b.csv     |
-| Yes        | 50   | 1000  | 10          | 2        | 2          | 0.000    | 0.000    | 0.0000  | Y/N          | c.csv     |
-| No         | 50   | 2500  | 50          | 5        | 5          | 0.000    | 0.000    | 0.0000  | Y/N          | d.csv     |
+| ---------- | ---- | ----- | ----------- | -------- | ---------- | -------- | -------- | ------- | ------------ | --------- |
+| Yes        | 50   | 2500  | 75          | 2        | 2          | 1.269    | 0.495    | 0.0130  | Yes          | [a.csv](./a.csv)     |
+| Yes        | 50   | 5000  | 75          | 4        | 2          | 1.549    | 0.940    | 0.1975  | No           | [b.csv](./b.csv)     |
+| Yes        | 50   | 1000  | 10          | 2        | 2          | 0.942    | 0.593    | 0.0377  | Yes          | [c.csv](./c.csv)     |
+| No         | 50   | 2500  | 50          | 5        | 5          | 0.802    | 0.174    | 0.0343  | Yes          | [d.csv](./d.csv)     |
+| No         | 50   | 1000  | 25          | 2        | 2          | 0.225    | -.036    | 0.1929  | No           | [e.csv](./e.csv)     |
+| Yes        | 25   | 1000  | 10          | 2        | 1          | -.096    | 0.399    | 0.0512  | No           | [f.csv](./f.csv)     |
 
 ## Interpretation of Results
 
