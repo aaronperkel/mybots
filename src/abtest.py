@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
 
-df = pd.read_csv("./results/h.csv")
+df = pd.read_csv("./results/i.csv")
 
 # basic stats
 max_vals = df[df.method=="max"].fitness
