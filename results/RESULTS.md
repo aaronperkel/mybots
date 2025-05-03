@@ -1,13 +1,16 @@
 # Results
 
-| Obstacles? | Reps | Steps | Generations | Pop Size | Swarm Size | Max Mean | Avg Mean | p-value | Significant? | File Name |
-| ---------- | ---- | ----- | ----------- | -------- | ---------- | -------- | -------- | ------- | ------------ | --------- |
+| Obstacles? | Reps | Steps | Generations | Pop Size | Swarm Size | Max Mean | Avg Mean | p-value | Significant? | File Name            |
+| ---------- | ---- | ----- | ----------- | -------- | ---------- | -------- | -------- | ------- | ------------ | ---------            |
 | Yes        | 50   | 2500  | 75          | 2        | 2          | 1.269    | 0.495    | 0.0130  | Yes          | [a.csv](./a.csv)     |
 | Yes        | 50   | 5000  | 75          | 4        | 2          | 1.549    | 0.940    | 0.1975  | No           | [b.csv](./b.csv)     |
 | Yes        | 50   | 1000  | 10          | 2        | 2          | 0.942    | 0.593    | 0.0377  | Yes          | [c.csv](./c.csv)     |
 | No         | 50   | 2500  | 50          | 5        | 5          | 0.802    | 0.174    | 0.0343  | Yes          | [d.csv](./d.csv)     |
 | No         | 50   | 1000  | 25          | 2        | 2          | 0.225    | -.036    | 0.1929  | No           | [e.csv](./e.csv)     |
 | Yes        | 25   | 1000  | 10          | 2        | 1          | -.096    | 0.399    | 0.0512  | No           | [f.csv](./f.csv)     |
+| Yes        | 50   | 2000  | 50          | 3        | 3          | 1.158    | 0.243    | 0.0009  | Yes          | [g.csv](./g.csv)     |
+| No         | 50   | 2000  | 75          | 2        | 3          | 0.748    | 0.269    | 0.1220  | No           | [h.csv](./h.csv)     |
+| Yes        | 50   | 3000  | 75          | 4        | 4          | ----     | ----     | ------  | --           | [i.csv](./i.csv)     |
 
 ## Interpretation of Results
 
