@@ -1,59 +1,117 @@
 """
 robot.py
-Defines the ROBOT class, which aggregates all the robot's sensors and motors.
+Defines the Robot class, which aggregates all the robot's sensors and motors.
 It loads the robot's URDF, prepares the sensors and motors, and coordinates sensing/acting.
 """
 
 import pybullet as p
 from pyrosim import pyrosim
-from sensor import SENSOR
-from motor import MOTOR
-from pyrosim.neuralNetwork import NEURAL_NETWORK
+from sensor import Sensor
+from motor import Motor
+from pyrosim.neuralNetwork import NeuralNetwork
 import os
 import constants as c
 
-class ROBOT:
-    def __init__(self, solutionID):
-        self.solutionID = solutionID
-        self.robot_id = p.loadURDF("./src/data/body.urdf")
-        pyrosim.Prepare_To_Simulate(self.robot_id)
-        self.nn = NEURAL_NETWORK(f"./src/data/brain{solutionID}.nndf")
-        self.Prepare_To_Sense()
-        self.Prepare_To_Act()
-        os.system(f'rm ./src/data/brain{self.solutionID}.nndf')
+class Robot:
+    """
+    Represents the robot in the simulation. This class handles the robot's
+    physical presence (URDF), its neural network, sensors, and motors.
+    It coordinates the sense-think-act cycle.
+    """
+    def __init__(self, solution_id):
+        """
+        Initializes the Robot.
 
-    def Prepare_To_Sense(self):
+        Args:
+            solution_id (int): The unique identifier for this robot's brain (solution).
+                               This ID is used to load the correct neural network file.
+        """
+        self.solution_id = solution_id
+        self.robot_id = p.loadURDF("./src/data/body.urdf") # Load robot model
+        pyrosim.Prepare_To_Simulate(self.robot_id) # Prepare Pyrosim for this robot
+
+        # Load the neural network for this robot
+        brain_file_path = f"./src/data/brain{self.solution_id}.nndf"
+        self.nn = NeuralNetwork(brain_file_path)
+        
+        self.prepare_to_sense() # Initialize sensors
+        self.prepare_to_act()   # Initialize motors
+        
+        # Clean up the temporary brain file after it's loaded into the neural network.
+        if os.path.exists(brain_file_path):
+            try:
+                os.remove(brain_file_path)
+            except OSError as e:
+                print(f"Error deleting brain file {brain_file_path}: {e}")
+
+    def prepare_to_sense(self):
+        """
+        Initializes all sensors for the robot based on its URDF definition.
+        Each link in the URDF gets a corresponding Sensor object.
+        """
         self.sensors = {}
         for link_name in pyrosim.linkNamesToIndices:
-            self.sensors[link_name] = SENSOR(link_name)
+            self.sensors[link_name] = Sensor(link_name)
 
-    def Sense(self, t):
-        for _, sensor_obj in self.sensors.items():
-            sensor_obj.Get_Value(t)
+    def sense(self, t):
+        """
+        Collects sensor data from the environment at the current time step.
 
-    def Prepare_To_Act(self):
+        Args:
+            t (int): The current simulation time step.
+        """
+        for sensor_obj in self.sensors.values(): # Iterate directly over values
+            sensor_obj.get_value(t)
+
+    def prepare_to_act(self):
+        """
+        Initializes all motors for the robot based on its URDF definition.
+        Each joint in the URDF gets a corresponding Motor object.
+        """
         self.motors = {}
         for joint_name in pyrosim.jointNamesToIndices:
-            self.motors[joint_name] = MOTOR(joint_name)
+            self.motors[joint_name] = Motor(joint_name)
 
-    def Act(self, t):
-        for neuron_name in self.nn.Get_Neuron_Names():
-            if self.nn.Is_Motor_Neuron(neuron_name):
-                jointName = self.nn.Get_Motor_Neurons_Joint(neuron_name)
-                desiredAngle = self.nn.Get_Value_Of(neuron_name) * c.MOTOR_JOINT_RANGE
-                self.motors[jointName].Set_Value(desiredAngle, self.robot_id)
+    def act(self, t):
+        """
+        Performs actions based on the neural network's output at the current time step.
+        The neural network determines the desired angle for each motor.
+        Note: Parameter 't' (time step) is currently unused in this method but
+        is kept for potential future use and API consistency.
+        """
+        for neuron_name in self.nn.get_neuron_names():
+            if self.nn.is_motor_neuron(neuron_name):
+                joint_name = self.nn.get_motor_neurons_joint(neuron_name)
+                desired_angle = self.nn.get_value_of(neuron_name) * c.MOTOR_JOINT_RANGE
+                self.motors[joint_name].set_value(desired_angle, self.robot_id)
 
-    def Think(self):
-        self.nn.Update()
+    def think(self):
+        """
+        Updates the state of the robot's neural network.
+        This typically involves propagating activation values through the network.
+        """
+        self.nn.update()
 
-    def Get_Fitness(self):
-        # self.stateOfLinkZero = p.getLinkState(self.robot_id, 0)
-        # self.positionOfLinkZero = self.stateOfLinkZero[0]
-        # self.xCoordinateOfLinkZero = self.positionOfLinkZero[0]
-        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot_id)
-        basePosition = basePositionAndOrientation[0]
-        xPosition = basePosition[0]
-        with open(f'./src/data/tmp{self.solutionID}.txt', 'w') as f:
-            f.write(str(xPosition))
-            f.close()
-        os.system(f'mv ./src/data/tmp{self.solutionID}.txt ./src/data/fitness{self.solutionID}.txt')
+    def get_fitness(self):
+        """
+        Calculates the robot's fitness based on its performance (e.g., distance traveled).
+        The fitness value (x-position of the base) is written to a temporary file,
+        which is then renamed to a final fitness file.
+        """
+        base_position_and_orientation = p.getBasePositionAndOrientation(self.robot_id) # Renamed variable
+        base_position = base_position_and_orientation[0] # Renamed variable
+        x_position = base_position[0] # Renamed variable
+        
+        # Use self.solution_id for consistency
+        tmp_fitness_file = f'./src/data/tmp{self.solution_id}.txt'
+        final_fitness_file = f'./src/data/fitness{self.solution_id}.txt'
+
+        with open(tmp_fitness_file, 'w') as f:
+            f.write(str(x_position))
+        
+        try:
+            os.rename(tmp_fitness_file, final_fitness_file)
+        except FileNotFoundError:
+            print(f"Error: Temporary fitness file {tmp_fitness_file} not found for renaming.")
+        except OSError as e:
+            print(f"Error renaming fitness file {tmp_fitness_file} to {final_fitness_file}: {e}")
